@@ -1,14 +1,24 @@
 // app/(app)/page.tsx
+
+
+import { headers } from "next/headers";
 import HomeClient from "@/components/home/HomeClient";
 
-async function getLatest(path: string, limit: number = 3) {
-  const base = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
-  const res = await fetch(`${base}/api/${path}`, {  cache: "no-store",});
+async function getBaseUrl() {
+  const headersList = await headers();
+  const host = headersList.get("host");
+  const protocol = process.env.NODE_ENV === "development" ? "http" : "https";
+  return `${protocol}://${host}`;
+}
+
+async function getLatest(path: string, limit = 3) {
+  const base = await getBaseUrl();
+  const res = await fetch(`${base}/api/${path}`, { cache: "no-store" });
+
   if (!res.ok) return [];
   const data = await res.json();
   return data.slice(0, limit);
 }
-
 
 export default async function HomePage() {
   const [sermons, events, bibleStudies] = await Promise.all([
@@ -17,8 +27,73 @@ export default async function HomePage() {
     getLatest("bible-studies"),
   ]);
 
-  return <HomeClient sermons={sermons} events={events} bibleStudies={bibleStudies} />;
+  return (
+    <HomeClient
+      sermons={sermons}
+      events={events}
+      bibleStudies={bibleStudies}
+    />
+  );
 }
+
+
+
+
+
+// import HomeClient from "@/components/home/HomeClient";
+
+// async function getLatest(path: string, limit: number = 3) {
+//   const res = await fetch(`/api/${path}`, {
+//     cache: "no-store",
+//   });
+
+//   if (!res.ok) return [];
+
+//   const data = await res.json();
+//   return data.slice(0, limit);
+// }
+
+// export default async function HomePage() {
+//   const [sermons, events, bibleStudies] = await Promise.all([
+//     getLatest("sermons"),
+//     getLatest("events"),
+//     getLatest("bible-studies"),
+//   ]);
+
+//   return (
+//     <HomeClient
+//       sermons={sermons}
+//       events={events}
+//       bibleStudies={bibleStudies}
+//     />
+//   );
+// }
+
+
+
+
+
+
+// import HomeClient from "@/components/home/HomeClient";
+
+// async function getLatest(path: string, limit: number = 3) {
+//   const base = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
+//   const res = await fetch(`${base}/api/${path}`, {  cache: "no-store",});
+//   if (!res.ok) return [];
+//   const data = await res.json();
+//   return data.slice(0, limit);
+// }
+
+
+// export default async function HomePage() {
+//   const [sermons, events, bibleStudies] = await Promise.all([
+//     getLatest("sermons"),
+//     getLatest("events"),
+//     getLatest("bible-studies"),
+//   ]);
+
+//   return <HomeClient sermons={sermons} events={events} bibleStudies={bibleStudies} />;
+// }
 
 
 

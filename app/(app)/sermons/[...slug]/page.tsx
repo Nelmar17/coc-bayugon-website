@@ -29,7 +29,6 @@ function makeDownloadName(title: string, url: string) {
 }
 
 
-
 /* ---------------- DATA ---------------- */
 
 async function getSermon(id: string) {
@@ -37,8 +36,6 @@ async function getSermon(id: string) {
   const res = await fetch(`${base}/api/sermons/${id}`, { cache: "no-store" });
   if (!res.ok) return null;
   return res.json();
-
-  
 }
 
 async function getRelatedSermons(sermon: any) {
