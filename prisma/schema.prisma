@@ -1,11 +1,11 @@
 generator client {
   provider = "prisma-client-js"
+  engineType = "binary"
 }
 
 datasource db {
   provider = "postgresql"
 }
-
 
 model User {
   id        String    @id @default(cuid())
@@ -197,13 +197,6 @@ model Article {
   image     String?
   createdAt DateTime @default(now())
   category  String?
-}
-
-model NewsletterSubscriber {
-  id        Int      @id @default(autoincrement())
-  email     String   @unique
-  name      String?
-  createdAt DateTime @default(now())
 }
 
 enum AttendanceType {
