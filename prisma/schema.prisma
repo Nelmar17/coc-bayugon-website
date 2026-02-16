@@ -1,0 +1,373 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+
+model User {
+  id        String    @id @default(cuid())
+  name      String?
+  email     String    @unique
+  password  String
+  role      String    @default("admin")
+
+  avatarUrl       String?
+  avatarPublicId  String?  
+
+  createdAt DateTime  @default(now())
+  onlineAt  DateTime?
+
+  member Member?
+
+  resetToken       String?
+  resetTokenExpiry DateTime?
+  deletedAt DateTime?
+  auditLogs AuditLog[] @relation("UserAuditTarget")
+}
+
+
+model AuditLog {
+  id          String   @id @default(cuid())
+  action      String // DELETE | RESTORE | PURGE
+  targetId    String?
+  targetEmail String
+  actorId     String
+  actorRole   String
+  createdAt   DateTime @default(now())
+
+  target User? @relation("UserAuditTarget", fields: [targetId], references: [id])
+}
+
+model Directory {
+  id               Int    @id @default(autoincrement())
+  congregationName String
+
+  region   String @default("other")
+  location String
+
+  latitude  Float?
+  longitude Float?
+
+  address       String
+  preacherName  String
+  contactNumber String
+  email         String
+  website       String?
+
+ 
+  worshipTimes String?  
+  elders       String?   
+
+  mainPhoto   String?
+  mainPhotoId String?
+
+  gallery    String[]
+  galleryIds String[]
+
+ 
+  welcomeMessage String? @default("We are glad you are here.")
+  bibleVerse     String? @default("Come to me, all who labor and are heavy laden, and I will give you rest.")
+  bibleRef       String? @default("Matthew 11:28")
+
+  createdAt DateTime @default(now())
+}
+
+model Sermon {
+  id       Int     @id @default(autoincrement())
+  title    String
+  preacher String
+  category String?
+
+  description String?
+  outline     String? // sermon outline (bullets / structure)
+  content     String? // full manuscript / long notes
+
+  imageUrl String?
+  imageId  String?
+
+  audioUrl String?
+  audioId  String?
+
+  videoUrl String?
+  videoId  String?
+
+  documentUrl String?
+  documentId  String?
+
+  date      DateTime
+
+  isPinned  Boolean @default(false) 
+  
+  createdAt DateTime @default(now())
+}
+
+model BibleStudy {
+  id          Int     @id @default(autoincrement())
+  title       String
+  speaker     String?
+  description String?
+  outline     String?
+  content     String?
+
+  imageUrl String?
+  imageId  String?
+
+  audioUrl String?
+  audioId  String?
+
+  videoUrl String?
+  videoId  String?
+
+  documentUrl String?
+  documentId  String?
+
+  studyDate DateTime
+  createdAt DateTime @default(now())
+
+  isPinned    Boolean  @default(false) 
+
+  // 🔹 CATEGORY
+  categoryId Int?
+  category   Category? @relation(fields: [categoryId], references: [id])
+}
+
+model Category {
+  id   Int    @id @default(autoincrement())
+  name String @unique
+
+  bibleStudies BibleStudy[]
+}
+
+model Event {
+  id Int @id @default(autoincrement())
+
+  title       String
+  description String?
+  location    String?
+
+  latitude  Float?
+  longitude Float?
+
+  eventDate DateTime
+  endDate   DateTime?
+
+  imageUrl String?
+  imageId  String?
+
+  isPublished Boolean @default(true)
+  isFeatured  Boolean @default(false)
+
+  createdAt           DateTime            @default(now())
+  updatedAt           DateTime            @updatedAt
+  preachingActivities PreachingActivity[]
+}
+
+model Schedule {
+  id  Int    @id @default(autoincrement())
+  day String
+
+  serviceName String
+  preacher    String?
+  createdAt   DateTime @default(now())
+  location    String?
+
+  latitude  Float?
+  longitude Float?
+
+  eventDate           DateTime?
+  endDate             DateTime? // ✅ NEW — duration
+  recurrence          String? // FREE TEXT (Weekly, Monthly, Quarterly, etc.)
+  title               String?
+  preachingActivities PreachingActivity[]
+}
+
+enum ScheduleRecurrence {
+  WEEKLY
+  MONTHLY_LAST
+}
+
+model Article {
+  id        Int      @id @default(autoincrement())
+  title     String
+  author    String
+  content   String
+  image     String?
+  createdAt DateTime @default(now())
+  category  String?
+}
+
+model NewsletterSubscriber {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  name      String?
+  createdAt DateTime @default(now())
+}
+
+enum AttendanceType {
+  worship
+  bible_study
+  event
+}
+
+enum AttendanceStatus {
+  present
+  absent
+}
+
+model Member {
+  id            Int       @id @default(autoincrement())
+  firstName     String
+  lastName      String
+  gender        String?
+  birthday      DateTime?
+  dateOfBaptism DateTime?
+  phone         String?
+  email         String?
+  congregation  String?
+  createdAt     DateTime  @default(now())
+
+  userId String? @unique
+  user   User?   @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  attendances Attendance[]
+}
+
+model Attendance {
+  id        Int              @id @default(autoincrement())
+  memberId  Int
+  date      DateTime // we will normalize to start-of-day
+  type      AttendanceType
+  status    AttendanceStatus @default(absent)
+  notes     String?
+  createdAt DateTime         @default(now())
+
+  member Member @relation(fields: [memberId], references: [id])
+
+  @@unique([memberId, date, type]) // IMPORTANT: prevents duplicates
+  @@index([date, type])
+}
+
+model ContactMessage {
+  id        Int      @id @default(autoincrement())
+  firstName String
+  lastName  String
+  email     String
+  phone     String?
+  subject   String
+  message   String
+  read      Boolean  @default(false)
+  resolved  Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  replies ContactReply[]
+}
+
+model ContactReply {
+  id        Int      @id @default(autoincrement())
+  messageId Int
+  body      String
+  sentBy    String // "admin"
+  createdAt DateTime @default(now())
+
+  message ContactMessage @relation(fields: [messageId], references: [id])
+}
+
+model AboutWhoWeAre {
+  id Int @id @default(autoincrement())
+
+  intro String // top paragraph
+
+  mission   String
+  belief    String
+  identity  String
+  community String
+
+  updatedAt DateTime @updatedAt
+}
+
+model Leader {
+  id Int @id @default(autoincrement())
+
+  name  String
+  role  String // Preacher, Elder, Deacon
+  order Int    @default(0) // display order
+
+  imageUrl String?
+  imageId  String?
+
+  bio       String? // optional
+  active    Boolean  @default(true)
+  createdAt DateTime @default(now())
+}
+
+model PreachingActivity {
+  id Int @id @default(autoincrement())
+
+  title String
+  type  PreachingActivityType
+
+  preacher    String
+  description String?
+  outline     String?
+  content     String?
+
+  congregation String?
+  location     String
+  address      String?
+
+  startDate DateTime
+  endDate   DateTime?
+
+  scheduleId Int?
+  schedule   Schedule? @relation(fields: [scheduleId], references: [id])
+
+  eventId Int?
+  event   Event? @relation(fields: [eventId], references: [id])
+
+  coverImageUrl String?
+  coverImageId  String?
+
+  gallery    String[]
+  galleryIds String[]
+
+  createdAt DateTime @default(now())
+}
+
+enum PreachingActivityType {
+  gospel_meeting
+  midweek_service
+  sunday_service
+  visitation
+  mission_trip
+  youth_service
+  special_event
+}
+
+model WhoWeAre {
+  id Int @id @default(autoincrement())
+
+  intro String?
+
+  mission   String
+  belief    String
+  identity  String
+  community String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model WeeklySchedule {
+  id        Int     @id @default(autoincrement())
+  day       String // "Sunday", "Wednesday"
+  title     String // "Bible Study", "Worship Service"
+  time      String // "9:30 AM"
+  order     Int // for sorting
+  isVisible Boolean @default(true)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
