@@ -14,6 +14,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
+  DialogDescription,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -178,9 +179,19 @@ async function handleSubmit(e: React.FormEvent) {
     toast.error("Title is required");
     return;
   }
-  if (!form.eventDate) {
+  if (!form.eventDate) { 
     toast.error("Event start date/time is required");
     return;
+  }
+
+  if (form.endDate) {
+    const start = new Date(form.eventDate);
+    const end = new Date(form.endDate);
+
+    if (end <= start) {
+      toast.error("Event end must be after start date/time");
+      return;
+    }
   }
 
   setSaving(true);
@@ -339,6 +350,9 @@ async function handleSubmit(e: React.FormEvent) {
           <DialogContent className="w-full max-w-2xl max-h-[90vh] overflow-y-auto">
             <DialogHeader>
               <DialogTitle>{editing ? "Edit Event" : "Add Event"}</DialogTitle>
+                <DialogDescription>
+                Fill in the event details before saving.
+              </DialogDescription>
             </DialogHeader>
 
             <form className="space-y-5" onSubmit={handleSubmit}>

@@ -22,23 +22,25 @@ export const eventBaseSchema = z.object({
   isFeatured: z.boolean().optional(),
 
   // We accept ISO string then convert to Date in route
-  eventDate: z.string().datetime("Invalid eventDate (must be ISO datetime)"),
-  endDate: z.string().datetime("Invalid endDate (must be ISO datetime)").nullable().optional(),
-}).superRefine((val, ctx) => {
-  // If endDate exists, must be >= eventDate
-  if (val.endDate) {
-    const start = new Date(val.eventDate).getTime();
-    const end = new Date(val.endDate).getTime();
-    if (!Number.isFinite(start) || !Number.isFinite(end)) return;
+    eventDate: z.string().datetime("Invalid eventDate (must be ISO datetime)"),
+    endDate: z.string().datetime("Invalid endDate (must be ISO datetime)").nullable().optional(),
+  }).superRefine((val, ctx) => {
+    // If endDate exists, must be >= eventDate
+    if (val.endDate && val.eventDate) {
+      const start = new Date(val.eventDate).getTime();
+      const end = new Date(val.endDate).getTime();
 
-    if (end < start) {
-      ctx.addIssue({
-        code: z.ZodIssueCode.custom,
-        path: ["endDate"],
-        message: "End date must be after start date",
-      });
+      if (!Number.isFinite(start) || !Number.isFinite(end)) return;
+
+      // 🔽 DITO YON
+      if (end <= start) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          path: ["endDate"],
+          message: "End date must be after start date",
+        });
+      }
     }
-  }
 
   // If one of lat/lng is set, require both
   const hasLat = val.latitude !== null && val.latitude !== undefined;
@@ -59,7 +61,10 @@ export const eventBaseSchema = z.object({
 
 export const eventCreateSchema = eventBaseSchema;
 
-export const eventUpdateSchema = eventBaseSchema.partial().extend({
-  // For update, eventDate can be optional
-  eventDate: z.string().datetime().optional(),
-});
+export const eventUpdateSchema = eventBaseSchema
+  .partial()
+  .extend({
+    eventDate: z.string().datetime().optional(),
+    endDate: z.string().datetime().nullable().optional(),
+  });
+
