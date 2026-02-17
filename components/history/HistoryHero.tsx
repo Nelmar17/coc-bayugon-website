@@ -12,7 +12,7 @@ type Slide = {
 
 const SLIDES: Slide[] = [
   {
-    src: "/header-history/hd1.jpg",
+    src: "/header-history/h1-1v2.jpg",
     duration: 6000,
     overlayClass: "bg-gradient-to-b from-black/50 via-black/30 to-black/70",
   },
