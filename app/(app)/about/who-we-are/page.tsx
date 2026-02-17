@@ -1,4 +1,4 @@
-import WhoWeAreClient from "./WhoWeAreClient";
+import WhoWeAreClient from "@/components/WhoWeAre/WhoWeAreClient";
 
 async function getData() {
   const base = process.env.NEXT_PUBLIC_BASE_URL ?? "";
@@ -18,7 +18,6 @@ export default async function WhoWeArePage() {
 
   return <WhoWeAreClient data={data} />;
 }
-
 
 
 

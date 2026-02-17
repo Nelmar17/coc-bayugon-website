@@ -4,31 +4,39 @@ import { cookies } from "next/headers";
 import { getUserFromToken } from "@/lib/auth";
 
 export async function POST(req: NextRequest) {
-  const token = (await cookies()).get("token")?.value;
-  const user = await getUserFromToken(token);
-  if (!user) return NextResponse.json("Unauthorized", { status: 401 });
+  try {
+    const token = (await cookies()).get("token")?.value;
+    const user = await getUserFromToken(token);
 
-  const formData = await req.formData();
-  const file = formData.get("file") as File | null;
-  const type = formData.get("type") as string | null; 
-  // type: image | audio | video | document
+    if (!user) {
+      return NextResponse.json(
+        { error: "Unauthorized" },
+        { status: 401 }
+      );
+    }
 
-  if (!file || !type)
-    return NextResponse.json("Invalid upload", { status: 400 });
+    const formData = await req.formData();
+    const file = formData.get("file") as File | null;
+    const type = formData.get("type") as string | null;
 
-  const bytes = await file.arrayBuffer();
-  const buffer = Buffer.from(bytes);
+    if (!file || !type) {
+      return NextResponse.json(
+        { error: "Invalid upload" },
+        { status: 400 }
+      );
+    }
 
-  const resourceType =
-    type === "image"
-      ? "image"
-      : type === "video"
-      ? "video"
-      : "raw"; // audio & documents
+    const buffer = Buffer.from(await file.arrayBuffer());
 
-  const uploaded = await new Promise<any>((resolve, reject) => {
-    cloudinary.uploader
-      .upload_stream(
+    const resourceType =
+      type === "image"
+        ? "image"
+        : type === "video"
+        ? "video"
+        : "raw";
+
+    const uploaded = await new Promise<any>((resolve, reject) => {
+      cloudinary.uploader.upload_stream(
         {
           folder: "church-of-christ/bible-studies",
           resource_type: resourceType,
@@ -37,15 +45,78 @@ export async function POST(req: NextRequest) {
           if (err || !result) reject(err);
           else resolve(result);
         }
-      )
-      .end(buffer);
-  });
+      ).end(buffer);
+    });
 
-  return NextResponse.json({
-    url: uploaded.secure_url,
-    public_id: uploaded.public_id,
-  });
+    return NextResponse.json({
+      url: uploaded.secure_url,
+      public_id: uploaded.public_id,
+    });
+  } catch (err) {
+    console.error("UPLOAD API ERROR:", err);
+
+    return NextResponse.json(
+      { error: "Upload failed" },
+      { status: 500 }
+    );
+  }
 }
+
+
+
+
+
+
+
+
+// import { NextRequest, NextResponse } from "next/server";
+// import cloudinary from "@/lib/cloudinary";
+// import { cookies } from "next/headers";
+// import { getUserFromToken } from "@/lib/auth";
+
+// export async function POST(req: NextRequest) {
+//   const token = (await cookies()).get("token")?.value;
+//   const user = await getUserFromToken(token);
+//   if (!user) return NextResponse.json("Unauthorized", { status: 401 });
+
+//   const formData = await req.formData();
+//   const file = formData.get("file") as File | null;
+//   const type = formData.get("type") as string | null; 
+//   // type: image | audio | video | document
+
+//   if (!file || !type)
+//     return NextResponse.json("Invalid upload", { status: 400 });
+
+//   const bytes = await file.arrayBuffer();
+//   const buffer = Buffer.from(bytes);
+
+//   const resourceType =
+//     type === "image"
+//       ? "image"
+//       : type === "video"
+//       ? "video"
+//       : "raw"; // audio & documents
+
+//   const uploaded = await new Promise<any>((resolve, reject) => {
+//     cloudinary.uploader
+//       .upload_stream(
+//         {
+//           folder: "church-of-christ/bible-studies",
+//           resource_type: resourceType,
+//         },
+//         (err, result) => {
+//           if (err || !result) reject(err);
+//           else resolve(result);
+//         }
+//       )
+//       .end(buffer);
+//   });
+
+//   return NextResponse.json({
+//     url: uploaded.secure_url,
+//     public_id: uploaded.public_id,
+//   });
+// }
 
 
 
