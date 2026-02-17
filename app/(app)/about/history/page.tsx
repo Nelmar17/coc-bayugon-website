@@ -15,7 +15,7 @@ const timeline = [
     year: "1990s",
     title: "The Beginning of the Bayugon Church of Christ",
       images: [
-      "/history/h1-1.jpg",
+      "/history/h1-1-v2.jpg",
       "/history/h1-2.jpg",
       "/history/h1-3.jpg",
       "/history/h1-4.jpg",
