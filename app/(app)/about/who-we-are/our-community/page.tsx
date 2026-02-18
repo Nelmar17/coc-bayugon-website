@@ -30,7 +30,8 @@ export default function OurCommunityPage() {
     .filter(Boolean);
 
   return (
-    <section className="max-w-6xl mx-auto px-4 pt-[100px] py-16 space-y-12">
+        <div className="min-h-screen bg-white dark:bg-slate-950">
+       <section className="max-w-7xl space-y-16 mx-auto px-4 pb-24 pt-[100px]">
       {/* BREADCRUMBS */}
          <nav className="flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400">
         
@@ -72,7 +73,7 @@ export default function OurCommunityPage() {
       </motion.header>
 
       {items.length > 1 ? (
-        <ul className="space-y-4">
+        <ul className="space-y-6">
           {items.map((item: string, i: number) => (
             <motion.li
               key={i}
@@ -80,7 +81,7 @@ export default function OurCommunityPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: i * 0.05 }}
-              className="flex gap-3 rounded-xl border bg-background p-6"
+              className="flex gap-3 rounded-xl border bg-background p-6 shadow-md border-blue-400/20 bg-white dark:bg-slate-950/60"
             >
               {/* <Circle className="mt-2 h-2 w-2 shrink-0 fill-current stroke-none text-slate-900 dark:text-slate-100" /> */}
               <span className="mt-2 h-2 w-2 shrink-0 rounded-full bg-slate-900 dark:bg-slate-100" />
@@ -95,5 +96,6 @@ export default function OurCommunityPage() {
         <p className="whitespace-pre-line">{data.community}</p>
       )}
     </section>
+  </div>
   );
 }

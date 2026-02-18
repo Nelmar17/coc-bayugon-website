@@ -131,12 +131,10 @@ const premiumCard =
   "rounded-3xl bg-white/60 dark:bg-slate-950/60 " +
   "backdrop-blur-xl backdrop-saturate-150 " +
   "border border-white/30 dark:border-slate-700/50 " +
-  "shadow-[0_20px_50px_-30px_rgba(0,0,0,0.45)] " +
+  "shadow-[0_20px_50px_-30px_rgba(0,0,0,0.45)]" +
   "transition-all duration-300 ease-out hover:-translate-y-1";
 
-
 export default function HomeClient({ sermons, events, bibleStudies }: Props) {
- 
 
   return (
     <div className="min-h-screen bg-white dark:bg-slate-950">
@@ -144,25 +142,64 @@ export default function HomeClient({ sermons, events, bibleStudies }: Props) {
       {/* ================= HERO (Cinematic Parallax + Cathedral typography) ================= */}
       {/* <section className="relative min-h-[110vh] sm:min-h-[90vh] -mt-16 overflow-hidden text-slate-50"> */}
       
-      <section className="relative min-h-[108vh] sm:min-h-[100vh] lg:min-h-screen overflow-hidden text-slate-50">
-
+     <section className="
+          relative
+          min-h-[92vh]
+          sm:min-h-[90vh]
+          lg:min-h-screen
+          overflow-hidden
+          text-slate-50
+        "
+      >
         {/* Parallax layer */}
         <div className="absolute inset-0">
         <HeroBackground />
         </div>
         <div className="absolute inset-0 bg-gradient-to-b from-slate-950/75 via-black/50 to-slate-950/40" />
 
-        <div className="relative z-10 flex items-center justify-center min-h-[86vh] pt-28 pb-24 sm:pt-0 sm:pb-0">
+          <div className="
+              relative z-10
+              flex
+              items-start
+              md:items-center
+              max-h-[650px]:items-start
+              justify-center
+              min-h-[86vh]
+              pt-28
+              md:pt-20
+              lg:pt-0
+              max-h-[650px]:pt-32
+              pb-32 md:pb-0
+            "
+          >
           <div className="w-full">
-            <div className="max-w-4xl mx-auto px-6 text-center space-y-7">
+              <div
+                className="
+                  max-w-4xl mx-auto px-6 text-center
+                  space-y-6
+                  max-h-[650px]:space-y-4
+                "
+              >
               <Reveal>
-                <p className="uppercase tracking-[0.35em] text-xs sm:text-base text-slate-300">
+              <p
+                className="
+                  uppercase tracking-[0.35em]
+                  text-xs sm:text-base
+                  text-slate-300
+                  max-h-[650px]:text-[0.6rem]
+                  max-h-[650px]:tracking-[0.25em]
+                "
+              >
                   Bayugon Church of Christ
                 </p>
               </Reveal>
               
               <Reveal delay={0.05}>
-                <div className="flex items-center justify-center gap-4">
+                <div className="
+                  flex items-center justify-center gap-4
+                  max-h-[650px]:gap-2
+                ">
+
                   <span className="h-px w-20 bg-slate-400/60" />
                   <span className="h-px w-20 bg-slate-400/60" />
                 </div>
@@ -170,25 +207,53 @@ export default function HomeClient({ sermons, events, bibleStudies }: Props) {
 
               {/* Refined typography hierarchy */}
               <Reveal delay={0.08}>
-                <h1 className="text-3xl sm:text-5xl md:text-6xl font-semibold leading-[1.08] tracking-tight text-balance">
-                  <span className="block">Examine the foundation of the faith</span>
+                <h1
+                  className="
+                    text-[clamp(2rem,4vw,3.5rem)]
+                    md:text-[clamp(2.3rem,4.5vw,3.75rem)]
+                    max-h-[650px]:md:text-[2.4rem]
+
+                    font-semibold
+                    leading-[1.05]
+                    tracking-tight
+                    text-balance
+                  "
+                  >
+                    <span className="block">Examine the foundation of the faith</span>
                   <span className="block ">established by Christ Himself.</span>
                 </h1>
               </Reveal>
 
-              <Reveal delay={0.12}>
-                <p className="max-w-2xl mx-auto text-slate-200/95 text-lg sm:text-xl leading-relaxed">
-                  We invite sincere seekers to examine the teachings of the New Testament
-                  and the foundation established by Christ.
-                </p>
-              </Reveal>
+            <Reveal delay={0.12}>
+              <p
+                className="
+                  max-w-2xl mx-auto
+                  text-slate-200/95
+                  text-lg sm:text-xl
+                  leading-relaxed
+
+                  [@media(max-height:650px)]:text-base
+                  [@media(max-height:650px)]:leading-snug
+                "
+              >
+                We invite sincere seekers to examine the teachings of the New Testament
+                and the foundation established by Christ.
+              </p>
+            </Reveal>
 
               <Reveal delay={0.16}>
                 <RotatingVerse />
               </Reveal>
 
               <Reveal delay={0.2}>
-                <div className="pt-4 flex flex-wrap justify-center gap-4">
+              <div
+                  className="
+                    pt-2 md:pt-6 pb-24 md:pb-0
+                    flex flex-wrap justify-center gap-4
+                    max-h-[650px]:pt-3
+                    max-h-[650px]:gap-3
+                  "
+                >
                   <Link
                     href="/about/who-we-are"
                     aria-label="Who we are"
@@ -218,7 +283,7 @@ export default function HomeClient({ sermons, events, bibleStudies }: Props) {
       </section>
 
       {/* ================= TOP CARDS ================= */}
-      <section className="max-w-7xl mx-auto px-6 -mt-24 sm:-mt-32 relative z-30">
+      <section className="max-w-7xl mx-auto px-6 -mt-24 sm:-mt-24 md:-mt-28 relative z-30">
         <div className="grid md:grid-cols-3 gap-8">
           <Reveal>
             <Link href="/about/who-we-are/our-belief" className="block">

@@ -323,7 +323,7 @@ export default function AdminUsersPage() {
       </div>
 
       {/* Table */}
-      <Card>
+      <Card className="rounded-xl border shadow-lg bg-white dark:bg-slate-950/50 border-blue-100 px-2 dark:border-slate-700/50">
         <CardHeader>
           <CardTitle>Users</CardTitle>
         </CardHeader>

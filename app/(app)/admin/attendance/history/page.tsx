@@ -240,7 +240,7 @@ export default function AttendanceHistoryPage() {
       </div>
 
        {/* FILTERS */}
-        <Card>
+        <Card className="rounded-xl border shadow-lg bg-white dark:bg-slate-950/50 border-blue-100 px-2 dark:border-slate-700/50">
           <CardContent className="grid grid-cols-1 gap-3 py-4 sm:grid-cols-4">
             {/* FROM */}
             <div className="space-y-1">
@@ -361,7 +361,7 @@ export default function AttendanceHistoryPage() {
         {/* ================= DESKTOP (ORIGINAL TABLE, WRAPPED) ================= */}
       <div className="hidden md:block overflow-x-auto">
       {/* TABLE */}
-        <Card>
+        <Card className="rounded-xl border shadow-lg bg-white dark:bg-slate-950/50 border-blue-100 px-2 dark:border-slate-700/50">
         <CardHeader>
         <CardTitle>Records</CardTitle>
         </CardHeader>
@@ -392,7 +392,7 @@ export default function AttendanceHistoryPage() {
                       <React.Fragment key={g.key}>
                         {/* GROUP ROW */}
                         <TableRow
-                          className="cursor-pointer bg-slate-50 hover:bg-slate-100"
+                          className="cursor-pointer bg-blue-50 dark:bg-slate-950 hover:bg-slate-100"
                           onClick={() => setExpanded(open ? null : g.key)}
                         >
                           {/* <TableCell className="w-[32px]">
@@ -436,8 +436,8 @@ export default function AttendanceHistoryPage() {
                         {/* CHILD ROWS (with CONGREGATION + NOTES) */}
                         {open && (
                           <TableRow>
-                            <TableCell colSpan={6} className="bg-white">
-                              <div className="rounded-md border bg-white">
+                            <TableCell colSpan={6} className="bg-blue-50 dark:bg-slate-950">
+                              <div className="rounded-md border bg-blue-50 dark:bg-slate-950">
                                 <Table>
                                   <TableHeader>
                                     <TableRow>

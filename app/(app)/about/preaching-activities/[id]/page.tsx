@@ -179,21 +179,37 @@ useEffect(() => {
 
 
   /* ================= STATES ================= */
-  if (loading) {
-    return (
-      <section className="max-w-4xl mx-auto px-4 py-24 text-center text-slate-500">
-        Loading…
-      </section>
-    );
-  }
+if (loading) {
+  return (
+    <div className="min-h-screen flex items-center justify-center pt-20">
+      <div className="flex flex-col items-center gap-3 text-slate-500">
+        <div className="h-6 w-6 animate-spin rounded-full border-2 border-slate-300 border-t-blue-600" />
+        <span className="text-sm">Loading activity…</span>
+      </div>
+    </div>
+  );
+}
 
-  if (!activity) {
-    return (
-      <section className="max-w-4xl mx-auto px-4 py-24">
+
+if (!activity) {
+  return (
+    <div className="min-h-screen pt-24">
+      <div className="max-w-4xl mx-auto px-4 text-center space-y-4">
         <h1 className="text-2xl font-bold">Activity not found</h1>
-      </section>
-    );
-  }
+        <p className="text-slate-500">
+          The activity you’re looking for doesn’t exist or was removed.
+        </p>
+        <button
+          onClick={() => router.back()}
+          className="inline-flex items-center gap-2 text-blue-600 hover:underline"
+        >
+          <ChevronsLeft className="w-4 h-4" />
+          Go back
+        </button>
+      </div>
+    </div>
+  );
+}
 
   /* ================= RENDER ================= */
   return (

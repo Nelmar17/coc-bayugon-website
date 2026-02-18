@@ -35,7 +35,8 @@ export default function OurIdentityPage() {
 
   return (
 
-    <section className="max-w-6xl mx-auto pt-[100px] px-4 py-16 space-y-12">
+    <div className="min-h-screen bg-white dark:bg-slate-950">
+       <section className="max-w-7xl space-y-16 mx-auto px-4 pb-24 pt-[100px]">
 
       {/* BREADCRUMBS */}
          <nav className="flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400">
@@ -81,7 +82,7 @@ export default function OurIdentityPage() {
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="rounded-xl border bg-background p-6 space-y-4"
+        className="rounded-xl border bg-background p-6 space-y-4 shadow-md border-blue-400/20 bg-white dark:bg-slate-950/60"
       >
         <h2 className="text-2xl font-semibold">Not a Denomination</h2>
 
@@ -106,12 +107,9 @@ export default function OurIdentityPage() {
         </p>
       </motion.div>
 
-
       {items.length > 1 ? (
 
-
-
-        <ul className="space-y-4">
+        <ul className="space-y-6">
           {items.map((item: string, i: number) => (
             <motion.li
               key={i}
@@ -119,7 +117,7 @@ export default function OurIdentityPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: i * 0.05 }}
-              className="flex gap-3 rounded-xl border bg-background p-6"
+              className="flex gap-3 rounded-xl border bg-background p-6 shadow-md border-blue-400/20 bg-white dark:bg-slate-950/60"
             >
               {/* <Circle className="mt-2 h-2 w-2 shrink-0 fill-current stroke-none text-slate-900 dark:text-slate-100" /> */}
               <span className="mt-2 h-2 w-2 shrink-0 rounded-full bg-slate-900 dark:bg-slate-100" />
@@ -133,5 +131,6 @@ export default function OurIdentityPage() {
         <p className="whitespace-pre-line">{data.identity}</p>
       )}
     </section>
+  </div>
   );
 }

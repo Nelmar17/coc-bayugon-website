@@ -67,7 +67,7 @@ export default function AdminDashboard() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.1 }}
                 >
-                  <Card className="border shadow-sm hover:shadow-md transition-all hover:scale-[1.02]">
+                  <Card className="rounded-xl border shadow-sm bg-white dark:bg-slate-950/50 border-white/30 dark:border-slate-700/50 hover:shadow-md transition-all hover:scale-[1.02]">
                     <CardHeader className="flex flex-row items-center justify-between">
                       <CardTitle className="text-sm text-slate-600">
                         {item.label}

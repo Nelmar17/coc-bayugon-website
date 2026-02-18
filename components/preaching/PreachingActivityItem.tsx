@@ -40,19 +40,19 @@ export default function PreachingActivityItem({ a }: { a: any }) {
             bg-blue-500
             ring-4 ring-blue-200/60 dark:ring-blue-900/70
             z-20
-        "
+        " 
         />
         <Link
             href={`/about/preaching-activities/${a.id}-${a.title
             .toLowerCase()
             .replace(/[^a-z0-9]+/g, "-")}`}
             className="group block rounded-2xl p-6 sm:p-7
-                    border border-slate-200/60 dark:border-slate-800
+                    border border-blue-400/20
                     bg-gradient-to-br
                     from-white/80 via-white/70 to-blue-50/60
                     dark:from-slate-950/70 dark:via-slate-900/70 dark:to-blue-950/40
                     backdrop-blur-xl
-                    shadow-sm hover:shadow-xl transition-all duration-300"
+                    shadow-sm hover:shadow-xl hover:border-blue-400 transition-all duration-300" 
         >
         {/* META */}
         <div className="flex flex-wrap gap-2 text-md text-slate-800 dark:text-slate-200 pt-2 mb-3">

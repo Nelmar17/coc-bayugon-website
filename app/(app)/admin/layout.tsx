@@ -297,7 +297,7 @@ const [usersOpen, setUsersOpen] = useState(
             position="top-right"
             className="z-[9999]"
           />
-    <div className="flex min-h-screen">
+    <div className="flex min-h-screen bg-white dark:bg-slate-950">
       {/* MOBILE SIDEBAR OPEN BUTTON */}
       {!mobileOpen && (
         <Button
@@ -318,7 +318,7 @@ const [usersOpen, setUsersOpen] = useState(
       {/* SIDEBAR */}
       <aside
         className={cn(
-          "fixed md:static z-30 bg-white pt-16 dark:bg-neutral-950 border-r border-slate-200 dark:border-slate-800 h-full flex flex-col transition-all duration-300",
+          "fixed md:static z-30 shadow-xl bg-white pt-16 dark:bg-slate-950 border-r border-slate-200 dark:border-slate-800 h-full flex flex-col transition-all duration-300",
           collapsed ? "w-16" : "w-64",
           mobileOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"
         )}
@@ -506,7 +506,7 @@ const [usersOpen, setUsersOpen] = useState(
         </nav>
 
         {/* USER FOOTER */}
-        <div className="p-4 border-t border-slate-200 dark:border-slate-800">
+        <div className="p-4 border-t pb-72 border-slate-200 dark:border-slate-800">
           <div className="flex items-center gap-3">
             <Avatar className="w-8 h-8">
               <AvatarImage src={user?.avatarUrl || "/default-avatar.png"} />
@@ -527,7 +527,7 @@ const [usersOpen, setUsersOpen] = useState(
             variant="ghost"
             size="sm"
             onClick={handleLogout}
-            className="mt-3 mb-52 w-full justify-start"
+            className="pt-4 w-full justify-start"
           >
 
             <LogOut className="w-4 h-4 mr-1" />
@@ -577,7 +577,7 @@ const [usersOpen, setUsersOpen] = useState(
               </h1>
 
               {!scrolled && (
-                <div className="mt-2 text-lg text-white/80 flex gap-1 flex-wrap justify-center">
+                <div className="pt-2 text-lg text-white/80 flex gap-1 flex-wrap justify-center">
                   <span>Admin</span>
                   {breadcrumbs.map((c, i) => (
                     <span key={i}>/ {c.replace("-", " ")}</span>

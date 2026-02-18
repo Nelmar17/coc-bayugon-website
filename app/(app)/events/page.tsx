@@ -98,7 +98,7 @@ const featured = useMemo(() => {
 
 
   return (
-    <div className="space-y-12">
+    <div className="space-y-20 bg-white dark:bg-slate-950">
       {/* HERO (covers navbar like contact) */}
       <section className="relative h-[55vh] min-h-[280px] overflow-hidden">
         <div
@@ -134,8 +134,8 @@ const featured = useMemo(() => {
                   onClick={() => setTab(k)}
                   className={cn(
                     "px-4 py-2 rounded-full text-sm border transition",
-                    "bg-white/10 text-white border-white/30 hover:bg-white/15",
-                    tab === k && "bg-white text-slate-900 border-white"
+                    "bg-white/10 text-white border-blue-400/20 hover:bg-white/15",
+                    tab === k && "bg-white text-slate-900"
                   )}
                 >
                   {k === "upcoming" ? "Upcoming" : k === "past" ? "Past" : "All"}
@@ -148,7 +148,7 @@ const featured = useMemo(() => {
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 placeholder="Search events..."
-                className="w-full max-w-md px-4 py-2 rounded-xl bg-white/15 text-white placeholder:text-white/70 border border-white/30 outline-none"
+                className="w-full max-w-md px-4 py-2 rounded-xl bg-white/15 text-white placeholder:text-white/70 border border-blue-400/20 outline-none"
               />
             </div>
           </div>
@@ -159,15 +159,23 @@ const featured = useMemo(() => {
       </section>
 
       {/* CONTENT */}
-      <div className="max-w-7xl mx-auto px-6 pb-24 space-y-8 -mt-16 relative z-20">
+      <div className="max-w-7xl mx-auto px-6 pb-24 space-y-8 relative z-20">
         {loading ? (
           <div className="rounded-2xl border bg-white/80 dark:bg-slate-900/60 p-6">
             <p className="text-sm text-slate-500">Loading events…</p>
           </div>
         ) : filtered.length === 0 ? (
-          <div className="rounded-2xl border bg-white/80 dark:bg-slate-900/60 p-6">
-            <p className="text-md text-slate-500">No events found.</p>
-          </div>
+
+           <div className="py-16 text-center">
+                  <div className="p-8 rounded-2xl border border-dashed border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-900">
+                    <h3 className="text-xl font-semibold text-slate-800 dark:text-slate-200">
+                      No events found.
+                    </h3>
+                    <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">
+                      Please check back soon for upcoming gatherings and special activities.
+                    </p>
+                  </div>
+                </div>
         ) : (
           <>
             {/* FEATURED */}
@@ -180,7 +188,7 @@ const featured = useMemo(() => {
               >
                 <Link
                   href={`/events/${featured.id}`}
-                  className="block rounded-2xl border overflow-hidden shadow-lg bg-white/80 dark:bg-slate-900/60 backdrop-blur hover:shadow-xl transition"
+                  className="block rounded-2xl border overflow-hidden shadow-lg border-blue-400/20 bg-white/80 dark:bg-slate-900/60 backdrop-blur hover:shadow-xl transition"
                 >
                 <div className="grid md:grid-cols-2">
                   <div className="relative h-56 md:h-full">
@@ -247,7 +255,7 @@ const featured = useMemo(() => {
                             className="
                               block h-full
                               rounded-2xl
-                              border
+                              border border-blue-400/20
                               overflow-hidden
                               bg-white/80
                               dark:bg-slate-900/60

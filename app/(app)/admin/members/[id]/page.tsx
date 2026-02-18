@@ -116,7 +116,7 @@ export default function MemberAttendanceProfilePage() {
         </p>
       </div>
 
-      <Card>
+      <Card className="rounded-xl border shadow-lg bg-white dark:bg-slate-950/50 border-blue-100 px-2 dark:border-slate-700/50">
         <CardHeader>
           <CardTitle>Filter Attendance</CardTitle>
         </CardHeader>
@@ -143,7 +143,7 @@ export default function MemberAttendanceProfilePage() {
         </CardContent>
       </Card>
 
-      <Card>
+      <Card className="rounded-xl border shadow-lg bg-white dark:bg-slate-950/50 border-blue-100 px-2 dark:border-slate-700/50">
         <CardHeader>
           <CardTitle>Attendance Records</CardTitle>
         </CardHeader>

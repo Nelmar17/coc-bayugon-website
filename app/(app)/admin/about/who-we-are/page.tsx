@@ -57,16 +57,16 @@ export default function AdminWhoWeArePage() {
   if (!data) return <p>Loading...</p>;
 
   return (
-    <div className="max-w-4xl mx-auto space-y-6">
-      <Card>
+    <div className="max-w-6xl mx-auto space-y-6">
+      <Card className="rounded-xl border shadow-lg bg-white dark:bg-slate-950/50 border-blue-100 px-2 dark:border-slate-700/50">
         <CardHeader>
-          <CardTitle>Who We Are</CardTitle>
+          <CardTitle className="text-lg font-medium">Who We Are</CardTitle>
         </CardHeader>
-        <CardContent className="space-y-4">
+        <CardContent className="space-y-6">
           <div>
             <Label>Intro (optional)</Label>
             <Textarea
-              rows={2}
+              className="min-h-[150px]"
               value={data.intro ?? ""}
               onChange={(e) =>
                 setData({ ...data, intro: e.target.value })
@@ -77,7 +77,7 @@ export default function AdminWhoWeArePage() {
           <div>
             <Label>Our Mission</Label>
             <Textarea
-              rows={3}
+              className="min-h-[150px]"
               value={data.mission}
               onChange={(e) =>
                 setData({ ...data, mission: e.target.value })
@@ -89,7 +89,7 @@ export default function AdminWhoWeArePage() {
           <div>
             <Label>Our Belief</Label>
             <Textarea
-              rows={3}
+              className="min-h-[150px]"
               value={data.belief}
               onChange={(e) =>
                 setData({ ...data, belief: e.target.value })
@@ -101,7 +101,7 @@ export default function AdminWhoWeArePage() {
           <div>
             <Label>Our Identity</Label>
             <Textarea
-              rows={3}
+              className="min-h-[150px]"
               value={data.identity}
               onChange={(e) =>
                 setData({ ...data, identity: e.target.value })
@@ -113,7 +113,7 @@ export default function AdminWhoWeArePage() {
           <div>
             <Label>Our Community</Label>
             <Textarea
-              rows={3}
+              className="min-h-[150px]"
               value={data.community}
               onChange={(e) =>
                 setData({ ...data, community: e.target.value })

@@ -133,8 +133,16 @@ function DesktopDropdown({
 
         <DropdownMenuContent
           align="start"
-          className="min-w-[220px]"
-        >
+          className="
+              min-w-[220px] rounded-xl p-2 space-y-1
+              bg-blue-50/60
+              backdrop-blur-lg
+              border border-blue-200/40
+              dark:border-blue-900/20            
+              shadow-xl
+              dark:bg-slate-950/60
+            "
+           >
           {section.items.map((item: any) => {
             const itemActive = isRouteActive(item.href);
             const Icon = item.icon;
@@ -144,9 +152,11 @@ function DesktopDropdown({
                 key={item.href}
                 asChild
                 className={`
-                  rounded-lg
-                  transition-colors
-                  data-[highlighted]:bg-blue-200/60
+                   rounded-full
+                    px-2 py-1.5
+                    text-base
+                    transition-colors
+                  data-[highlighted]:bg-blue-400/60
                   dark:data-[highlighted]:bg-blue-700/40
                   ${itemActive ? "bg-blue-200 dark:bg-blue-950/60" : ""}
                 `}
@@ -432,7 +442,7 @@ const showLightNavbar = scrolled || isLightRoute;
                 )}
 
 
-              {/* THEME TOGGLE (LAGING HIWALAY) */}
+              {/* THEME TOGGLE*/}
               <ThemeToggle />
 
           </div>
@@ -579,29 +589,95 @@ const isOnline = isUserOnline(user?.onlineAt);
           </button>
           </DropdownMenuTrigger>
 
-          <DropdownMenuContent align="end">
-          <DropdownMenuLabel>Account</DropdownMenuLabel>
-          <DropdownMenuSeparator />
+          <DropdownMenuContent align="end"
+          className="space-y-1 rounded-xl bg-blue-50/60
+                      p-3 backdrop-blur-lg
+                      border border-blue-200/40
+                    dark:border-blue-900/20              
+                      shadow-md
+                      dark:bg-slate-950/60">
+          <DropdownMenuLabel className="px-2 py-2 text-base">Account</DropdownMenuLabel>
+          <DropdownMenuSeparator className="my-2 h-px bg-blue-200/60 dark:bg-blue-950/40"/>
 
           {/* ✅ ALL LOGGED-IN MEMBERS */}
-          <DropdownMenuItem asChild>
-            <Link href="/members">Members List</Link>
+          <DropdownMenuItem
+            asChild
+            className="
+              rounded-full
+              p-0
+              text-base
+              transition-colors
+              data-[highlighted]:bg-blue-600/40
+            "
+          >
+            <Link
+              href="/members"
+              className="
+                flex w-full items-center
+                px-3 py-1.5
+              
+                text-slate-950
+                dark:text-white
+              "
+            >
+              Members List
+            </Link>
           </DropdownMenuItem>
 
-          <DropdownMenuItem asChild>
-          <Link href="/me">My Attendance</Link>
+          <DropdownMenuItem asChild             
+              className="
+                  rounded-full
+                  p-0
+                  text-base
+                  transition-colors
+                  data-[highlighted]:bg-blue-600/40
+                "
+              >
+              <Link href="/me"    
+                  className="
+                    flex w-full items-center
+                    px-3 py-1.5
+                  
+                    text-slate-950
+                    dark:text-white"
+                >My Attendance</Link>
           </DropdownMenuItem>
 
           {/* ✅ ALL USERS */}
-          <DropdownMenuItem asChild>
-            <Link href="/profile">My Profile</Link>
+          <DropdownMenuItem asChild 
+                 className="
+                  rounded-full
+                  p-0
+                  text-base
+                  transition-colors
+                  data-[highlighted]:bg-blue-600/40
+                ">
+            <Link href="/profile"                   
+                 className="
+                    flex w-full items-center
+                    px-3 py-1.5             
+                    text-slate-950
+                    dark:text-white"
+                    >My Profile</Link>
           </DropdownMenuItem>
 
         {/* ✅ ADMIN ONLY */}
-
+ <DropdownMenuSeparator className="my-2 h-px bg-blue-200/60 dark:bg-blue-950/40"/>
         {user?.role !== "viewer" && (
-          <DropdownMenuItem asChild>
-            <Link href="/admin">Admin Dashboard</Link>
+          <DropdownMenuItem asChild     
+              className="
+                     rounded-full
+                     p-0
+                     text-base
+                     transition-colors
+                   data-[highlighted]:bg-blue-600/40">
+            <Link href="/admin"   
+               className="
+                    flex w-full items-center
+                    px-3 py-1.5             
+                  text-slate-950
+                  dark:text-white"
+                    >Admin Dashboard</Link>
           </DropdownMenuItem>
         )}
 
@@ -615,7 +691,7 @@ const isOnline = isUserOnline(user?.onlineAt);
           <Link href="/profile">My Profile</Link>
         </DropdownMenuItem> */}
 
-      <DropdownMenuSeparator />
+       
           {/* THEME */}
           {/* <DropdownMenuItem asChild>
             <div className="flex items-center justify-between px-2 py-0 ">
@@ -624,16 +700,28 @@ const isOnline = isUserOnline(user?.onlineAt);
           </div>
         </DropdownMenuItem>
       <DropdownMenuSeparator /> */}
-
+      
+    <DropdownMenuSeparator className="my-2 h-px bg-blue-200/60 dark:bg-blue-950/40"/>
         <DropdownMenuItem
-          onClick={() => {
-           fetch("/api/logout", { method: "POST" }).then(() => {
-            window.dispatchEvent(new Event("user-logout"));
-            router.replace("/login"); // ✅ SAFE
-          });
+            className="
+                rounded-full
+                px-3 py-1.5
+                text-base
+                justify-center
+                text-white
+                bg-blue-600
+                transition-colors
 
-          }}
-        >
+                data-[highlighted]:bg-blue-800
+                data-[highlighted]:text-white
+              "
+            onClick={() => {
+              fetch("/api/logout", { method: "POST" }).then(() => {
+                window.dispatchEvent(new Event("user-logout"));
+                router.replace("/login");
+              });
+            }}
+          >
           Logout
         </DropdownMenuItem>
       </DropdownMenuContent>

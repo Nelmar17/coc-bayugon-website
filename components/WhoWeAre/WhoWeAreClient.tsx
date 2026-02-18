@@ -231,7 +231,7 @@ function InfoBlock({
   return (
     <motion.div variants={sectionVariants}>
       <Link href={href} className="group block">
-        <div className="rounded-xl border bg-background p-6 space-y-3
+        <div className="rounded-xl border border-blue-400/20 bg-white dark:bg-slate-950/60 p-6 space-y-3
                         shadow-lg hover:shadow-xl hover:border-blue-700
                         transition-all duration-300">
           <h3 className="text-xl font-semibold group-hover:text-blue-700 dark:group-hover:text-blue-400">

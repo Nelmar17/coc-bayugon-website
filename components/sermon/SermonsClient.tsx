@@ -250,8 +250,8 @@ export default function SermonsClient() {
           whileInView="visible"
           viewport={{ once: true }}
           className="flex flex-wrap gap-3 items-center rounded-2xl p-4
-                      bg-white/70 dark:bg-slate-900/60
-                      backdrop-blur-xl border"
+                      bg-white/70 dark:bg-slate-900/80
+                      backdrop-blur-xl border border-blue-400/20"
         >
           <select
             value={year}
@@ -328,16 +328,16 @@ export default function SermonsClient() {
                     initial="hidden"
                     whileInView="visible"
                     viewport={{ once: true }}
-                    whileHover={{ scale: 1.02 }}
-                    transition={{
-                      type: "spring",
-                      stiffness: 260,
-                      damping: 20,
-                    }}
+                    whileHover={{ y: -6 }}
+                    transition={{ type: "spring", stiffness: 220, damping: 26 }}
                     className="relative rounded-xl
                       bg-slate-50 dark:bg-slate-900
-                      shadow-2xl
-                      overflow-hidden"
+                        shadow-xl
+                        hover:shadow-2xl
+                        transition-shadow
+                        duration-300
+                        ease-out
+                        overflow-hidden"
                   >
                     {s.isPinned && (
                       <span

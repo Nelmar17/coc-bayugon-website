@@ -154,7 +154,7 @@ function AboutCard({
   return (
     <motion.div variants={itemVariants}>
       <Link href={href}>
-        <Card className="group rounded-2xl h-full transition hover:shadow-lg hover:-translate-y-1 active:scale-[0.98]">
+        <Card className="group rounded-2xl h-full transition border border-blue-400/20 bg-white dark:bg-slate-950/60 hover:shadow-lg hover:-translate-y-1 active:scale-[0.98]">
           <CardHeader className="flex flex-row items-center gap-3">
             <div className="rounded-lg bg-blue-100 dark:bg-blue-900/30 p-2">
               <Icon className="w-5 h-5 text-blue-600 dark:text-blue-400" />

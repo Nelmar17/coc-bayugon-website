@@ -3,19 +3,12 @@
 import { useEffect, useMemo, useState } from "react";
 import CurveWave from "@/components/ui/CurveWave";
 
-/* --------------------------------
- * HELPERS (SAFE + ACCURATE)
- * -------------------------------- */
-
 function calculateAge(birthday?: string | null) {
   if (!birthday) return null;
-
-  const birth = new Date(birthday); // ✅ FIX HERE
-
+  const birth = new Date(birthday);
   if (Number.isNaN(birth.getTime())) return null;
 
   const today = new Date();
-
   let age = today.getFullYear() - birth.getFullYear();
 
   const hasHadBirthdayThisYear =
@@ -23,32 +16,21 @@ function calculateAge(birthday?: string | null) {
     (today.getMonth() === birth.getMonth() &&
       today.getDate() >= birth.getDate());
 
-  if (!hasHadBirthdayThisYear) {
-    age--;
-  }
-
+  if (!hasHadBirthdayThisYear) age--;
   return age;
 }
 
 function isBirthdayToday(birthday?: string | null) {
   if (!birthday) return false;
-
   const birth = new Date(birthday);
   if (Number.isNaN(birth.getTime())) return false;
 
   const today = new Date();
-
-  const birthMonth = birth.getUTCMonth() + 1;
-  const birthDay = birth.getUTCDate();
-
-  const todayMonth = today.getMonth() + 1;
-  const todayDay = today.getDate();
-
-  return birthMonth === todayMonth && birthDay === todayDay;
+  return (
+    birth.getUTCMonth() + 1 === today.getMonth() + 1 &&
+    birth.getUTCDate() === today.getDate()
+  );
 }
-
-
-/* -------------------------------- */
 
 const PAGE_SIZE = 50;
 
@@ -56,24 +38,19 @@ export default function PublicMembersPage() {
   const [rows, setRows] = useState<any[]>([]);
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    setLoading(true);
     fetch("/api/public/members", { credentials: "include" })
       .then((r) => r.json())
-      .then(setRows);
+      .then((data) => setRows(Array.isArray(data) ? data : []))
+      .catch(() => setRows([]))
+      .finally(() => setLoading(false));
   }, []);
 
+  /* ================= ALWAYS RUN HOOKS ================= */
 
-//   useEffect(() => {
-//   if (rows.length > 0) {
-//     console.log("PUBLIC MEMBER SAMPLE:", rows[0]);
-//   }
-// }, [rows]);
-
-
-  /* -----------------------------
-   * FILTER + SORT
-   * ---------------------------- */
   const filtered = useMemo(() => {
     return rows
       .filter((m) => {
@@ -83,18 +60,15 @@ export default function PublicMembersPage() {
       .sort((a, b) => a.lastName.localeCompare(b.lastName));
   }, [rows, search]);
 
-  /* -----------------------------
-   * PAGINATION
-   * ---------------------------- */
   const totalPages = Math.ceil(filtered.length / PAGE_SIZE);
-  const paginated = filtered.slice(
-    (page - 1) * PAGE_SIZE,
-    page * PAGE_SIZE
-  );
 
-  /* -----------------------------
-   * GROUP BY LETTER
-   * ---------------------------- */
+  const paginated = useMemo(() => {
+    return filtered.slice(
+      (page - 1) * PAGE_SIZE,
+      page * PAGE_SIZE
+    );
+  }, [filtered, page]);
+
   const grouped = useMemo(() => {
     return paginated.reduce((acc: any, m) => {
       const letter = m.lastName?.[0]?.toUpperCase() ?? "#";
@@ -104,23 +78,39 @@ export default function PublicMembersPage() {
     }, {});
   }, [paginated]);
 
-  /* -----------------------------
-   * INDEX MAP (micro-opt)
-   * ---------------------------- */
   const indexMap = useMemo(() => {
     const map = new Map<number, number>();
     filtered.forEach((m, i) => map.set(m.id, i));
     return map;
   }, [filtered]);
 
-  if (rows.length === 0) {
+  /* ================= SAFE UI RETURNS ================= */
+
+  if (loading) {
     return (
-      <p className="text-center mt-20 text-slate-500">
-        Please login to view members.
-      </p>
+      <div className="min-h-screen flex items-center justify-center">
+        <p className="text-lg text-slate-500 animate-pulse">
+          Loading members…
+        </p>
+      </div>
     );
   }
 
+  if (rows.length === 0) {
+    return (
+      <div className="min-h-screen flex items-center justify-center px-4">
+        <div className="max-w-md text-center">
+          <h2 className="text-2xl font-semibold text-slate-700">
+            No members found
+          </h2>
+          <p className="mt-2 text-slate-500">
+            Please contact the Bayugon Church Admin to add you to the members list.
+          </p>
+        </div>
+      </div>
+    );
+  }
+  
   return (
     <div className="space-y-6 bg-white dark:bg-slate-950">
       {/* HEADER IMAGE */}

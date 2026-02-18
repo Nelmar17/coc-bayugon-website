@@ -448,11 +448,17 @@ return (
                       {items.map((s) => (
                         <motion.div
                           key={s.id}
-                          variants={itemVariants}
+                          variants={itemVariants}                                           
+                          initial="hidden"
+                          whileInView="visible"
+                          viewport={{ once: true }}
+                          whileHover={{ y: -6 }}
+                          transition={{ type: "spring", stiffness: 220, damping: 26 }}
                           className="relative"
-                        >
+                            >
                           <Link href={`/schedules/${s.id}`} className="block">
-                            <div className="p-5 sm:p-6 rounded-2xl border bg-white dark:bg-slate-900 border-blue-500/60 shadow-md hover:shadow-lg transition-all">
+                            <div className="p-5 sm:p-6 rounded-2xl border bg-white dark:bg-slate-900 border-blue-400/20
+                                            shadow-lg hover:shadow-xl transition-shadow duration-300 ease-out hover:border-blue-400">
                               <h2 className="text-xl font-semibold">
                                 {s.title || s.serviceName}
                               </h2>

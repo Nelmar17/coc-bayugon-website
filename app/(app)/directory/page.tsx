@@ -147,7 +147,7 @@ export default function DirectoryPage() {
   
   {/* ================= MAIN CONTENT ================= */}
   
-    <div className="max-w-7xl mx-auto px-4 -mt-24 relative z-20 space-y-10">
+    <div className="max-w-7xl mx-auto px-4 relative z-20 space-y-10">
       <h1 className="text-4xl font-bold text-left">
         Find a Congregation Near You 
       </h1>
@@ -196,13 +196,32 @@ export default function DirectoryPage() {
         onChange={(e) => setSearch(e.target.value)}
       />
 
-      {/* LIST */}
-
+       {/* ================= LOADING ================= */}
         {loading ? (
-          <p className="text-center text-slate-500 py-12">
-            Loading congregations…
-          </p>
+            <div className="min-h-[calc(100vh-4rem)] flex items-center justify-center pt-20">
+              <div className="flex flex-col items-center gap-3 text-slate-500">
+                <div className="h-6 w-6 animate-spin rounded-full border-2 border-slate-300 border-t-blue-600" />
+                <span className="text-sm">Loading congregations…</span>
+              </div>
+            </div>
         ) : (
+         <>
+            {/* ================= EMPTY STATE ================= */}
+            {filtered.length === 0 && (
+                <div className="py-16 text-center">
+                  <div className="p-8 rounded-2xl border border-dashed border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-900">
+                    <h3 className="text-xl font-semibold text-slate-800 dark:text-slate-200">
+                      No congregations found.
+                    </h3>
+                    <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">
+                      We’ll be adding congregations soon. Please check back later.
+                    </p>
+                  </div>
+                </div>
+            )}
+
+        {/* ================= GRID ================= */}
+         {filtered.length > 0 && (
             <motion.div
               variants={stagger}
               initial="hidden"
@@ -210,20 +229,32 @@ export default function DirectoryPage() {
               className="grid md:grid-cols-3 pb-28 gap-6"
             >
             {filtered.map((item) => (
-                  <motion.a
-                    layout
-                    variants={fadeUp}
-                    key={item.id}
-                    href={`/directory/${item.id}`}
-                    onMouseEnter={() => setActiveId(item.id)}
-                    onMouseLeave={() => setActiveId(null)}
-                    whileHover={{ scale: 1.02 }}
-                    className={`rounded-xl shadow-2xl backdrop-blur pb-8 bg-white/80 hover:shadow-2xl dark:border dark:hover:border-blue-600 dark:border-blue-800/60 dark:bg-slate-950 transition ${
-                      activeId === item.id
-                        ? "shadow-2xl "
-                        : "shadow"
-                    }`}
-                  >
+            <motion.a
+              layout
+              variants={fadeUp}
+              key={item.id}
+              href={`/directory/${item.id}`}
+              onMouseEnter={() => setActiveId(item.id)}
+              onMouseLeave={() => setActiveId(null)}
+              whileHover={{ y: -6 }}
+              transition={{ type: "spring", stiffness: 220, damping: 26 }}
+              className={`
+                rounded-xl
+                pb-8
+                backdrop-blur
+                bg-white/80
+                dark:bg-slate-950
+                shadow-lg
+                hover:shadow-2xl
+                transition-shadow
+                duration-300
+                ease-out
+                dark:border
+                dark:border-blue-800/60
+                dark:hover:border-blue-600
+              `}
+            >
+
             {/* {item.mainPhoto && (
               <img
                 src={item.mainPhoto}
@@ -255,6 +286,8 @@ export default function DirectoryPage() {
               ))}
             </motion.div>
           )}
+          </>
+        )}
       </div>
     </div>
   );

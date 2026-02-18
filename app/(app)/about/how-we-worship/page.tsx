@@ -129,7 +129,7 @@ const worshipItems = [
 
 export default function HowWeWorshipPage() {
   return (
-    <div className="bg-white dark:bg-slate-950 space-y-20">
+    <div className="min-h-screen space-y-20 bg-white dark:bg-slate-950">
       {/* HEADER */}
       <section className="relative h-[30vh] min-h-[360px] overflow-hidden">
         <div
@@ -195,14 +195,13 @@ export default function HowWeWorshipPage() {
                 <motion.div
                     key={item.no}
                     variants={itemVariants}
-                    className="space-y-12"
+                    className="space-y-24"
                     >
-
                 {/* ROW */}
                 <div className="grid md:grid-cols-2 gap-20 items-start">
                 
                 {/* LEFT */}
-                <div className="space-y-4">
+                <div className="space-y-6">
                     <div className="flex rounded-tl-2xl rounded-br-2xl rounded-tr-none rounded-bl-none border py-1 px-2 border-blue-300 dark:border-blue-900 items-center gap-3">
                         <span className="w-9 h-9 rounded-full bg-slate-900 text-white flex items-center justify-center font-bold">
                             {item.no}
@@ -227,7 +226,7 @@ export default function HowWeWorshipPage() {
                     </p>
                     </Card> */}
 
-                  <Card className="rounded-2xl p-10 shadow-md text-center space-y-4">
+                  <Card className="rounded-2xl p-10 shadow-lg text-center border border-blue-400/20 bg-white dark:bg-slate-950/60 space-y-6">
                         {/* ICON */}
                         <div className="mx-auto w-fit rounded-full bg-blue-100 dark:bg-blue-900/30 p-3">
                             <BookOpen className="w-6 h-6 text-blue-600 dark:text-blue-400" />

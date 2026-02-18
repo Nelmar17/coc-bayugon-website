@@ -241,7 +241,7 @@ useEffect(() => {
         onMouseLeave={() => setPaused(false)}
         className={clsx(
           `
-          absolute z-40
+          absolute z-20
           top-1/2 left-4 -translate-y-1/2
           md:left-16
           h-10 w-10 rounded-full
@@ -267,7 +267,7 @@ useEffect(() => {
         onMouseLeave={() => setPaused(false)}
         className={clsx(
           `
-          absolute z-40
+          absolute z-20
           top-1/2 right-4 -translate-y-1/2
           md:right-16
           h-10 w-10 rounded-full
@@ -287,7 +287,7 @@ useEffect(() => {
       </button>
 
       {/* DOTS */}
-      <div className="absolute bottom-32 sm:bottom-36 left-1/2 -translate-x-1/2 flex gap-2 z-20">
+      <div className="absolute bottom-44 sm:bottom-36 md:bottom-32 left-1/2 -translate-x-1/2 flex gap-2 z-20">
         {order.map((_, i) => (
           <button
             key={i}

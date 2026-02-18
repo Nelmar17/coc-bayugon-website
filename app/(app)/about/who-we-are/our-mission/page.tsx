@@ -29,8 +29,8 @@ export default function OurMissionPage() {
     .filter(Boolean);
 
   return (
-    <section className="max-w-6xl pt-[100px] mx-auto px-4 py-16 space-y-12">
-
+    <div className="min-h-screen bg-white dark:bg-slate-950">
+     <section className="max-w-6xl pt-[100px] pb-24 mx-auto px-4 space-y-16">
 
       {/* BREADCRUMBS */}
                <nav className="flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400">
@@ -64,7 +64,7 @@ export default function OurMissionPage() {
         initial={{ opacity: 0, y: -16 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
-        className="space-y-3"
+        className="space-y-4"
       >
         <h1 className="text-4xl font-bold">Our Mission</h1>
         <p className="italic text-slate-700 dark:text-slate-400">
@@ -73,7 +73,7 @@ export default function OurMissionPage() {
       </motion.header>
 
       {items.length > 1 ? (
-        <ul className="space-y-4">
+        <ul className="space-y-6">
           {items.map((item: string, i: number) => (
             <motion.li
               key={i}
@@ -81,7 +81,7 @@ export default function OurMissionPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: i * 0.05 }}
-              className="flex gap-3 rounded-xl border bg-background p-6"
+              className="flex gap-3 rounded-xl shadow-md border bg-background p-6 border-blue-400/20 bg-white dark:bg-slate-950/60"
             >
               {/* <Circle className="mt-2 h-2 w-2 shrink-0 fill-current stroke-none text-slate-900 dark:text-slate-100" /> */}
               <span className="mt-2 h-2 w-2 shrink-0 rounded-full bg-slate-900 dark:bg-slate-100" />
@@ -95,5 +95,6 @@ export default function OurMissionPage() {
         <p className="whitespace-pre-line">{data.mission}</p>
       )}
     </section>
+  </div>
   );
 }

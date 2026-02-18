@@ -91,7 +91,7 @@ export default function AdminMessagesPage() {
     <div className="space-y-6">
       <h1 className="text-2xl font-semibold">Messages</h1>
 
-      <Card>
+      <Card className="rounded-xl border shadow-lg bg-white dark:bg-slate-950/50 border-blue-100 px-2 dark:border-slate-700/50">
         <CardHeader className="flex flex-row items-center justify-between">
           <CardTitle>Inbox</CardTitle>
 

@@ -149,7 +149,9 @@ useEffect(() => {
   }, [beliefs]);
 
   return (
-   <section className="max-w-7xl mx-auto px-4 pt-[100px] pb-12 space-y-12">
+
+    <div className="min-h-screen bg-white dark:bg-slate-950">
+       <section className="max-w-7xl space-y-16 mx-auto px-4 pb-24 pt-[100px]">
 
        {/* BREADCRUMBS */}
          <nav className="flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400">
@@ -193,7 +195,7 @@ useEffect(() => {
         initial={{ opacity: 0, y: -16 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
-        className="space-y-3 text-center"
+        className="space-y-3 text-center "
       >
         <h1 className="text-4xl font-bold ">Our Belief</h1>
         <p className="italic text-lg md:text-lg text-slate-700 dark:text-slate-400">
@@ -333,7 +335,7 @@ useEffect(() => {
             </div>
           </aside>
 
-      <div className="space-y-8">
+      <div className="space-y-12">
         {beliefs.map((b, index) => (
             <motion.article
                 id={b.slug}
@@ -346,7 +348,7 @@ useEffect(() => {
                 animate={{
                   opacity: activeSlug && activeSlug !== b.slug ? 0.45 : 1,
                 }}
-                className="scroll-mt-[72px] rounded-2xl border bg-background px-10 py-9 shadow-sm space-y-6 transition-opacity"
+                className="scroll-mt-[72px] rounded-2xl border bg-background px-10 py-9 shadow-lg space-y-6 border-blue-400/20 bg-white dark:bg-slate-950/60 transition-opacity"
               >
 
             {/* MAIN HEADER */}
@@ -396,5 +398,6 @@ useEffect(() => {
         </div>
       </div>
     </section>
+  </div>
   );
 }

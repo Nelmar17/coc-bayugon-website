@@ -244,12 +244,12 @@ function BibleStudiesContent() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="flex flex-wrap gap-3 items-center rounded-2xl p-4 bg-white/70 dark:bg-slate-900/60 backdrop-blur-xl border"
+          className="flex flex-wrap gap-3 items-center rounded-2xl p-4 bg-white/70 dark:bg-slate-900/80 border-blue-400/20 backdrop-blur-xl border"
         >
           <select
             value={year}
             onChange={(e) => updateFilter(e.target.value, preacher)}
-            className="rounded-lg border px-3 py-2 text-sm"
+            className="rounded-xl border border-blue-400/20 px-3 py-2 text-sm"
           >
             <option value="all">All Years</option>
             {years.map((y) => (
@@ -260,7 +260,7 @@ function BibleStudiesContent() {
           <select
             value={preacher}
             onChange={(e) => updateFilter(year, e.target.value)}
-            className="rounded-lg border px-3 py-2 text-sm"
+            className="rounded-xl border border-blue-400/20 px-3 py-2 text-sm"
           >
             <option value="all">All Preachers</option>
             {preachers.map((p) => (
@@ -281,7 +281,7 @@ function BibleStudiesContent() {
               href="/bible-studies"
               scroll={false}
               className={`px-3 py-1 rounded-full border text-sm ${
-                !selectedCategory ? "bg-blue-600 text-white" : "bg-white"
+                !selectedCategory ? "bg-blue-600 text-white dark:text-slate-50" : "bg-slate-50 dark:bg-slate-950 border border-blue-400/20 text-slate-950 dark:text-slate-100"
               }`}
             >
               All
@@ -292,7 +292,7 @@ function BibleStudiesContent() {
                 key={c.id}
                 href={`/bible-studies?category=${c.id}`}
                 scroll={false}
-                className={`px-3 py-1 rounded-full border text-sm ${
+                className={`px-3 py-1 rounded-full border text-sm border-blue-400/20 ${
                   selectedCategory === String(c.id)
                     ? "bg-blue-600 text-white"
                     : "bg-slate-100 dark:bg-slate-950"
@@ -304,34 +304,6 @@ function BibleStudiesContent() {
           </div>
         )}
 
-        {/* {categories.length > 0 && (
-          <div className="flex pt-6 flex-wrap gap-2 justify-center md:justify-start">
-            <Link
-              href="/bible-studies"
-              scroll={false}
-              className={`px-3 py-1 rounded-full border text-sm ${
-                !selectedCategory ? "bg-blue-600 text-white" : "bg-white"
-              }`}
-            >
-              All
-            </Link>
-
-            {categories.map((c) => (
-              <Link
-                key={c.id}
-                href={`/bible-studies?category=${c.id}`}
-                scroll={false}
-                className={`px-3 py-1 rounded-full border text-sm ${
-                  selectedCategory === String(c.id)
-                    ? "bg-blue-600 text-white"
-                    : "bg-slate-100 dark:bg-slate-950"
-                }`}
-              >
-                {c.name}
-              </Link>
-            ))}
-          </div>
-        )} */}
 
         {/* LIST */}
         {loading ? (
@@ -342,7 +314,7 @@ function BibleStudiesContent() {
           </p>
         ) : (
           <>
-            <div className="grid pt-6 grid-cols-1 lg:grid-cols-1 gap-6">
+            <div className="grid pt-6 grid-cols-1 lg:grid-cols-1 gap-8">
            {visibleItems.map((b) => {
                   const daysDiff =
                     Math.max(
@@ -359,20 +331,22 @@ function BibleStudiesContent() {
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true }}
-                whileHover={{ scale: 1.02, y: -4 }}
-                transition={{ type: "spring", stiffness: 260, damping: 20 }}
+                whileHover={{ y: -6 }}
+                transition={{ type: "spring", stiffness: 220, damping: 26 }}
               >
               <Link
                 href={`/bible-studies/${b.id}-${toSlug(b.title)}`}
                 className="
                   group relative
                   block rounded-2xl border
-                  bg-white dark:bg-slate-900
+                  bg-white dark:bg-slate-950
                   overflow-hidden
-                  transition
-                  shadow-xl
+                  shadow-xl border-blue-400/20              
+                  hover:border-blue-400         
                   hover:shadow-2xl
-                  hover:border-blue-400
+                  transition-shadow
+                  duration-300
+                  ease-out
                 "
               >
                 {b.isPinned && (

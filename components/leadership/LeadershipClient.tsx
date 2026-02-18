@@ -28,7 +28,7 @@ export default function LeadershipClient({ leaders }: { leaders: any[] }) {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
-        className="rounded-xl border bg-background p-6 space-y-4 max-w-6xl"
+        className="max-w-7xl rounded-2xl bg-background p-6 space-y-4 shadow-md border border-blue-400/20 bg-white dark:bg-slate-950/60"
       >
         <h2 className="text-2xl font-semibold">Biblical Leadership</h2>
 
@@ -66,7 +66,7 @@ export default function LeadershipClient({ leaders }: { leaders: any[] }) {
             variants={fadeUp}
             whileHover={{ y: -4 }}
             transition={{ type: "spring", stiffness: 260, damping: 22 }}
-            className="rounded-xl border bg-background p-6 text-center space-y-4 hover:shadow-lg transition"
+            className="rounded-2xl bg-background p-6 text-center space-y-4 shadow-md hover:shadow-lg border border-blue-400/20 bg-white dark:bg-slate-950/60 transition"
           >
             {l.imageUrl && (
               <div className="mx-auto w-24 h-24 rounded-full ring-1 ring-blue-400 overflow-hidden border">

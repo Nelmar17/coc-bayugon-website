@@ -720,15 +720,15 @@ function datetimeLocalToISO(v: string) {
       </div>
 
       {/* List */}
-      <Card>
+      <Card className="rounded-xl border shadow-lg bg-white dark:bg-slate-950/50 border-blue-100 px-2 dark:border-slate-700/50">
         <CardHeader>
           <CardTitle>Schedules</CardTitle>
         </CardHeader>
         <CardContent>
           {loading ? (
-            <p className="text-sm text-slate-500">Loading...</p>
+            <p className="text-sm text-slate-700 dark:text-slate-400">Loading...</p>
           ) : filtered.length === 0 ? (
-            <p className="text-sm text-slate-500">No schedules yet.</p>
+            <p className="text-sm text-slate-700 dark:text-slate-400">No schedules yet.</p>
           ) : (
             <div className="space-y-4">
               {/* ✅ Mobile cards */}
@@ -834,7 +834,7 @@ function datetimeLocalToISO(v: string) {
                       return (
                         <TableRow
                           key={s.id}
-                          className={isUpcoming ? "bg-emerald-50" : ""}
+                          className={isUpcoming ? "bg-emerald-50 dark:bg-slate-950" : ""}
                         >
                           <TableCell>
                             <div className="flex flex-col">

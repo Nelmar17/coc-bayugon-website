@@ -182,7 +182,7 @@ export default function ContactPage() {
           whileInView="visible"
           viewport={{ once: true }}
         >
-        <Card className="rounded-xl border backdrop-blur bg-white/80 dark:bg-slate-900/60 shadow-lg p-4">
+        <Card className="rounded-xl border border-blue-400/20 backdrop-blur bg-white/80 dark:bg-slate-900/60 shadow-lg p-4">
 
           <CardHeader className="space-y-6">
             <p className="text-lg font-bold tracking-widest text-sky-700 dark:text-sky-400 uppercase">
@@ -195,14 +195,14 @@ export default function ContactPage() {
 
           <CardContent>
             <form onSubmit={handleSubmit} className="space-y-4 pt-2 pb-12">
-              <div className="grid md:grid-cols-2 gap-4">
+              <div className="grid md:grid-cols-2 gap-6">
                 <div>
                   <Label className="font-semibold text-sm md:text-base text-slate-800 dark:text-slate-200">First Name</Label>
                   <Input
                     name="firstName"
                     value={form.firstName}
                     onChange={handleChange}
-                    required
+                    required className="mt-2 border-blue-400/60 dark:border-blue-400/20"
                   />
                 </div>
 
@@ -212,7 +212,7 @@ export default function ContactPage() {
                     name="lastName"
                     value={form.lastName}
                     onChange={handleChange}
-                    required
+                    required className="mt-2 border-blue-400/60 dark:border-blue-400/20"
                   />
                 </div>
               </div>
@@ -225,7 +225,7 @@ export default function ContactPage() {
                     name="email"
                     value={form.email}
                     onChange={handleChange}
-                    required
+                    required className="mt-2 border-blue-400/60 dark:border-blue-400/20"
                   />
                 </div>
 
@@ -235,7 +235,7 @@ export default function ContactPage() {
                     name="phone"
                     value={form.phone}
                     onChange={handleChange}
-                    placeholder="Optional"
+                    placeholder="Optional" className="mt-2 border-blue-400/60 dark:border-blue-400/20"
                   />
                 </div>
               </div>
@@ -246,7 +246,7 @@ export default function ContactPage() {
                   name="subject"
                   value={form.subject}
                   onChange={handleChange}
-                  required
+                  required className="mt-2 border-blue-400/60 dark:border-blue-400/20"
                 />
               </div>
 
@@ -257,7 +257,7 @@ export default function ContactPage() {
                   value={form.message}
                   onChange={handleChange}
                   rows={5}
-                  required
+                  required className="mt-2 border-blue-400/60 dark:border-blue-400/20"
                 />
               </div>
 
@@ -290,9 +290,9 @@ export default function ContactPage() {
                         dark:bg-blue-600
                         hover:dark:bg-blue-500
                         dark:text-white
-                        shadow-xl shadow-blue-400/60 dark:shadow-blue-900/40
+                        shadow-lg shadow-blue-400/40 dark:shadow-blue-900/20
                         transition-all duration-300
-                        hover:shadow-2xl
+                        hover:shadow-xl
                         hover:-translate-y-0.5
                         active:scale-95
                       "
@@ -313,7 +313,7 @@ export default function ContactPage() {
           whileInView="visible"
           viewport={{ once: true }}
         >
-        <Card className="rounded-xl border backdrop-blur bg-white/80 dark:bg-slate-900/60 shadow-lg p-2">
+        <Card className="rounded-xl border backdrop-blur bg-white/80 dark:bg-slate-900/60 shadow-lg border-blue-400/20 p-2">
           <CardHeader>
             <CardTitle>Our Location</CardTitle>
           </CardHeader>
