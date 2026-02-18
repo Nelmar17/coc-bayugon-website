@@ -77,7 +77,7 @@ export default function MemberDashboardPage() {
    * Render
    * -------------------------------------------- */
   return (
-    <div className="space-y-6 bg-white dark:bg-slate-950">
+    <div className="min-h-screen space-y-6 bg-white dark:bg-slate-950">
       {/* ================= HERO ================= */}
       <section className="relative h-[28vh] sm:h-[45vh] md:h-[40vh] min-h-[380px] sm:min-h-[320px] overflow-hidden">
         <div
@@ -91,26 +91,7 @@ export default function MemberDashboardPage() {
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white">
               Attendance
             </h1>
-
-            {loading ? (
-              /* ===== LOADING ===== */
-              <div className="mt-6 p-6 rounded-2xl bg-white/10 backdrop-blur border border-white/20">
-                <p className="text-white text-lg font-medium animate-pulse">
-                  Loading dashboard…
-                </p>
-              </div>
-            ) : !member ? (
-              /* ===== EMPTY ===== */
-              <div className="mt-6 p-8 rounded-2xl border border-white/20 bg-white/10 backdrop-blur">
-                <h3 className="text-xl font-semibold text-white">
-                  You are not yet registered as a member
-                </h3>
-                <p className="mt-2 text-sm text-slate-200">
-                  Please reach out to the Bayugon Church Admin so they can add you to the members list.
-                </p>
-              </div>
-            ) : (
-              /* ===== MEMBER HERO TEXT ===== */
+            
               <p className="pt-2 sm:pt-4 text-slate-200 text-base sm:text-lg leading-relaxed">
                 <span className="block italic">
                   “Not forsaking the assembling of ourselves together…”
@@ -119,7 +100,6 @@ export default function MemberDashboardPage() {
                   Hebrews 10:25 (KJV)
                 </span>
               </p>
-            )}
           </div>
         </div>
 
@@ -127,6 +107,28 @@ export default function MemberDashboardPage() {
           <CurveWave />
         </div>
       </section>
+
+      {loading && (
+          <div className="flex justify-center pt-24">
+            <div className="p-6 rounded-2xl border bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-300 animate-pulse">
+              Loading dashboard…
+            </div>
+          </div>
+        )}
+
+        {!loading && !member && (
+          <div className="flex justify-center pt-28 px-4">
+            <div className="max-w-xl text-center p-8 rounded-2xl border border-dashed bg-slate-50 dark:bg-slate-900">
+              <h3 className="text-xl font-semibold">
+                You are not yet registered as a member
+              </h3>
+              <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">
+                Please reach out to the Bayugon Church Admin so they can add you to the members list.
+              </p>
+            </div>
+          </div>
+        )}
+
 
       {/* ================= MEMBER BODY ================= */}
       {!loading && member && (
@@ -166,7 +168,6 @@ export default function MemberDashboardPage() {
     </div>
   );
 }
-
         /* ---------------------------------------------
         * Small Components
         * -------------------------------------------- */

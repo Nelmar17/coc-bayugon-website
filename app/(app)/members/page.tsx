@@ -186,7 +186,7 @@ export default function PublicMembersPage() {
                     key={m.id}
                     className="
                       flex items-start gap-4 rounded-xl border p-4
-                      bg-white dark:bg-slate-900 shadow-sm
+                      bg-white dark:bg-slate-950/80 shadow-sm border-blue-400/20
                       hover:shadow-md transition
                     "
                   >

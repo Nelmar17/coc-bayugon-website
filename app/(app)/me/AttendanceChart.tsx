@@ -162,7 +162,6 @@ export default function AttendanceChart() {
   return (
     <div className="space-y-4 bg-white dark:bg-slate-950">
 
-
       {/* ================= CONTROLS ================= */}
        <div className="flex flex-col gap-2 sm:flex-row sm:flex-wrap">
             {/* TYPE DROPDOWN */}
