@@ -401,10 +401,10 @@ export default function HomeClient({ sermons, events, bibleStudies }: Props) {
 
                   <h2 className="text-4xl sm:text-5xl font-semibold tracking-tight leading-tight text-slate-900 dark:text-slate-50 text-balance">
                      <span className="block">Worship God in</span>
-                     <span className="block mt-3">Spirit and in Truth</span>
+                     <span className="block mt-2 md:mt-3">Spirit and in Truth</span>
                   </h2>
 
-                  <p className="text-lg text-slate-600 dark:text-slate-400 leading-relaxed">
+                  <p className="text-lg text-slate-700 dark:text-slate-500 leading-relaxed">
                     We gather weekly to praise God, study His Word, and strengthen one
                     another in faith and love.
                   </p>
