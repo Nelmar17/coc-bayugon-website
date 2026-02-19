@@ -30,7 +30,14 @@ export default function RotatingVerse() {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -8 }}
           transition={{ duration: 0.6 }}
-          className="uppercase tracking-widest font-medium text-md sm:text-lg text-amber-400"
+          className="
+          uppercase tracking-widest font-medium text-amber-400
+          text-sm            /* mobile – untouched */
+          md:text-base       /* tablet */
+          lg:text-sm         /* LAPTOP – LIITAN */
+          xl:text-base       /* malaking laptop – konti lang */
+          2xl:text-lg        /* desktop – pwede na lumaki */
+        "
         >
           {verses[index]}
         </motion.p>

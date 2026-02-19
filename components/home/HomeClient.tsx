@@ -163,18 +163,18 @@ export default function HomeClient({ sermons, events, bibleStudies }: Props) {
         </div>
         <div className="absolute inset-0 bg-gradient-to-b from-slate-950/75 via-black/50 to-slate-950/40" />
 
-          <div className="
+          <div
+            className="
               relative z-10
-              flex
-              items-start
-              md:items-center
-              max-h-[650px]:items-start
+              flex items-start md:items-center
               justify-center
               min-h-[86vh]
-              pt-28
-              md:pt-20
-              lg:pt-0
-              max-h-[650px]:pt-32
+
+              pt-28 md:pt-20 lg:pt-0
+
+              [@media(max-height:820px)]:pt-32
+              [@media(max-height:760px)]:pt-36
+
               pb-32 md:pb-0
             "
           >
@@ -188,14 +188,20 @@ export default function HomeClient({ sermons, events, bibleStudies }: Props) {
               >
               <Reveal>
               <p
-                className="
-                  uppercase tracking-[0.35em]
-                  text-xs sm:text-base
-                  text-slate-300
-                  max-h-[650px]:text-[0.6rem]
-                  max-h-[650px]:tracking-[0.25em]
-                "
-              >
+              className="
+                    uppercase tracking-[0.35em]
+                    text-[0.6rem]        /* mobile – stay small */
+                    md:text-xs           /* tablet */
+                    lg:text-[0.6rem]     /* LAPTOP – LIITAN */
+                    xl:text-xs           /* malaking laptop */
+                    2xl:text-sm          /* desktop lang lumaki */
+
+                    text-slate-300
+
+                    max-h-[650px]:text-[0.55rem]
+                    max-h-[650px]:tracking-[0.25em]
+                  "
+                  >
                   Bayugon Church of Christ
                 </p>
               </Reveal>
@@ -217,14 +223,16 @@ export default function HomeClient({ sermons, events, bibleStudies }: Props) {
                   className="
                     text-[clamp(2rem,4vw,3.5rem)]
                     md:text-[clamp(2.3rem,4.5vw,3.75rem)]
-                    max-h-[650px]:md:text-[2.4rem]
+
+                    [@media(max-height:820px)]:md:text-[2.6rem]
+                    [@media(max-height:760px)]:md:text-[2.4rem]
 
                     font-semibold
                     leading-[1.05]
                     tracking-tight
                     text-balance
                   "
-                  >
+                >
                     <span className="block">Examine the foundation of the faith</span>
                   <span className="block ">established by Christ Himself.</span>
                 </h1>
@@ -252,18 +260,25 @@ export default function HomeClient({ sermons, events, bibleStudies }: Props) {
               </Reveal>
 
               <Reveal delay={0.2}>
-              <div
-                  className="
-                    pt-2 md:pt-6 pb-24 md:pb-0
-                    flex flex-wrap justify-center gap-4
-                    max-h-[650px]:pt-3
-                    max-h-[650px]:gap-3
-                  "
-                >
+            <div
+              className="
+                pt-2 md:pt-6 pb-24 md:pb-0
+                flex flex-wrap justify-center gap-4
+
+                [@media(min-width:1024px)_and_(max-width:1536px)_and_(max-height:900px)]:pt-3
+                [@media(min-width:1024px)_and_(max-width:1536px)_and_(max-height:900px)]:pb-16
+                [@media(min-width:1024px)_and_(max-width:1536px)_and_(max-height:900px)]:gap-3
+              "
+            >
                   <Link
                     href="/about/who-we-are"
                     aria-label="Who we are"
-                    className="inline-flex items-center gap-2 px-7 py-3 rounded-full bg-blue-700 text-white text-sm font-semibold hover:bg-blue-600 transition-all duration-300 shadow-md"
+                    className="inline-flex items-center gap-2 px-7 py-3 rounded-full
+                     bg-blue-700 text-white text-sm font-semibold hover:bg-blue-600 
+                     transition-all duration-300 shadow-md 
+                     [@media(min-width:1024px)_and_(max-width:1536px)_and_(max-height:900px)]:px-5
+                     [@media(min-width:1024px)_and_(max-width:1536px)_and_(max-height:900px)]:py-2
+                     [@media(min-width:1024px)_and_(max-width:1536px)_and_(max-height:900px)]:text-[0.8rem]"
                   >
                     Investigate Us <ChevronsRight className="w-5 h-5 text-white shrink-0" />
                   </Link>
@@ -271,7 +286,12 @@ export default function HomeClient({ sermons, events, bibleStudies }: Props) {
                   <Link
                     href="/directory"
                     aria-label="Find a congregation directory"
-                    className="inline-flex items-center gap-2 px-7 py-3 rounded-full border border-blue-400/70 text-white text-sm font-semibold hover:bg-blue-400/10 transition-all duration-300"
+                    className="inline-flex items-center gap-2 px-7 py-3 rounded-full 
+                    border border-blue-400/70 text-white text-sm font-semibold
+                     hover:bg-blue-400/10 transition-all duration-300 
+                     [@media(min-width:1024px)_and_(max-width:1536px)_and_(max-height:900px)]:px-5
+                     [@media(min-width:1024px)_and_(max-width:1536px)_and_(max-height:900px)]:py-2
+                     [@media(min-width:1024px)_and_(max-width:1536px)_and_(max-height:900px)]:text-[0.8rem]"
                   >
                     <MapPin className="w-5 h-5 text-blue-400 shrink-0" /> Find a Congregation
                   </Link>
@@ -289,7 +309,16 @@ export default function HomeClient({ sermons, events, bibleStudies }: Props) {
       </section>
 
       {/* ================= TOP CARDS ================= */}
-      <section className="max-w-7xl mx-auto px-6 -mt-24 sm:-mt-24 md:-mt-28 relative z-30">
+      <section
+          className="
+            max-w-7xl mx-auto px-6
+            -mt-24 sm:-mt-24 md:-mt-32
+            relative z-30
+
+            /* LAPTOP ONLY FIX */
+            [@media(min-width:1024px)_and_(max-width:1440px)_and_(max-height:900px)]:-mt-20
+          "
+        >
         <div className="grid md:grid-cols-3 gap-8">
           <Reveal>
             <Link href="/about/who-we-are/our-belief" className="block">
@@ -401,7 +430,7 @@ export default function HomeClient({ sermons, events, bibleStudies }: Props) {
 
                   <h2 className="text-4xl sm:text-5xl font-semibold tracking-tight leading-tight text-slate-900 dark:text-slate-50 text-balance">
                      <span className="block">Worship God in</span>
-                     <span className="block mt-2 md:mt-3">Spirit and in Truth</span>
+                     <span className="block mt-1 md:mt-3">Spirit and in Truth</span>
                   </h2>
 
                   <p className="text-lg text-slate-700 dark:text-slate-500 leading-relaxed">
@@ -435,14 +464,14 @@ export default function HomeClient({ sermons, events, bibleStudies }: Props) {
         </section>
 
         {/* ================= OUR BELIEF PREVIEW (Blue-50) ================= */}
-        <section className="relative bg-blue-50 dark:bg-slate-900 py-20">
+        <section className="relative bg-blue-50 dark:bg-slate-900 py-16">
           <Reveal>
             <OurBeliefPreview />
           </Reveal>
         </section>
 
         {/* ================= OUTREACH (Blue-50 → White via wave) ================= */}
-        <section className="relative bg-blue-50 dark:bg-slate-900 py-20">
+        <section className="relative bg-blue-50 dark:bg-slate-900 pt-28">
           <div className="absolute bottom-0 left-0 w-full pointer-events-none">
             <WaveFade fromClass="from-transparent" toClass="to-white dark:to-slate-950" position="bottom" />
             <CurveWaveResponsive direction="reverse" baseClass="fill-white dark:fill-slate-950" />
@@ -520,7 +549,7 @@ export default function HomeClient({ sermons, events, bibleStudies }: Props) {
         </section>
 
         {/* ================= WHY VISIT (White) ================= */}
-        <section className="bg-white dark:bg-slate-950 py-28">
+        <section className="bg-white dark:bg-slate-950 mt-32 py-28">
           <div className="max-w-6xl mx-auto px-6">
             <Reveal>
               <div className="rounded-3xl border border-slate-200/60 dark:border-slate-800/60 bg-white/70 dark:bg-slate-950/60 backdrop-blur-xl shadow-[0_18px_45px_-30px_rgba(2,6,23,0.35)] dark:shadow-none p-10 sm:p-12 text-center space-y-6">
@@ -671,7 +700,7 @@ export default function HomeClient({ sermons, events, bibleStudies }: Props) {
         </section>
 
         {/* ================= EVENTS (Blue-50) ================= */}
-        <section id="events" className="bg-blue-50 dark:bg-slate-900 py-20">
+        <section id="events" className="bg-blue-50 dark:bg-slate-900 pt-32 py-12">
         <div className="max-w-7xl mx-auto px-6 space-y-12">
 
             {/* Header */}
@@ -764,7 +793,7 @@ export default function HomeClient({ sermons, events, bibleStudies }: Props) {
         </section>
 
         {/* ================= DIRECTORY CTA (White) ================= */}
-        <section className="bg-blue-50 dark:bg-slate-900 py-28">
+        <section className="bg-blue-50 dark:bg-slate-900 pb-16 py-32">
           <div className="max-w-5xl mx-auto px-6">
             <Reveal>
               <div className="rounded-3xl border border-slate-200/60 dark:border-slate-800/60 bg-white/70 dark:bg-slate-950/60 backdrop-blur-xl shadow-[0_18px_45px_-30px_rgba(2,6,23,0.35)] dark:shadow-none p-10 sm:p-12 text-center space-y-6">

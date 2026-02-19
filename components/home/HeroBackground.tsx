@@ -75,6 +75,9 @@ export default function HeroBackground() {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const [offsetY, setOffsetY] = useState(0);
 
+  const isMobile =
+  typeof window !== "undefined" && window.innerWidth < 768;
+
 
   useEffect(() => {
   const current = order[index]?.src;
@@ -173,13 +176,19 @@ useEffect(() => {
   }, []);
 
   /* mobile auto-hide arrows */
-  const resetMobileArrowTimer = () => {
-    setShowArrows(true);
-    clearTimeout(hideArrowTimer.current!);
-    hideArrowTimer.current = setTimeout(() => {
-      setShowArrows(false);
-    }, 3000);
-  };
+const resetMobileArrowTimer = () => {
+  if (!isMobile) return;
+
+  setShowArrows(true);
+
+  if (hideArrowTimer.current) {
+    clearTimeout(hideArrowTimer.current);
+  }
+
+  hideArrowTimer.current = setTimeout(() => {
+    setShowArrows(false);
+  }, 2500);
+};
 
   /* swipe handlers */
   const onPointerDown = (e: React.PointerEvent) => {
@@ -237,8 +246,14 @@ useEffect(() => {
       {/* PREV */}
       <button
         onClick={goPrev}
-        onMouseEnter={() => setPaused(true)}
-        onMouseLeave={() => setPaused(false)}
+       onPointerDown={() => {
+            if (isMobile) resetMobileArrowTimer();
+            else setPaused(true);
+          }}
+          onPointerUp={() => {
+            if (!isMobile) setPaused(false);
+          }}
+
         className={clsx(
           `
           absolute z-20
@@ -251,8 +266,9 @@ useEffect(() => {
           transition
           `,
           showArrows
-            ? "opacity-100"
-            : "opacity-0 md:opacity-0 md:group-hover:opacity-100"
+            ? "opacity-100 visible pointer-events-auto"
+            : "opacity-0 invisible pointer-events-none md:visible md:pointer-events-auto md:group-hover:opacity-100"
+
         )}
 
         aria-label="Previous slide"
@@ -263,8 +279,13 @@ useEffect(() => {
       {/* NEXT */}
       <button
         onClick={() => goNext()}
-        onMouseEnter={() => setPaused(true)}
-        onMouseLeave={() => setPaused(false)}
+        onPointerDown={() => {
+          if (isMobile) resetMobileArrowTimer();
+          else setPaused(true);
+        }}
+        onPointerUp={() => {
+          if (!isMobile) setPaused(false);
+        }}
         className={clsx(
           `
           absolute z-20
@@ -276,9 +297,9 @@ useEffect(() => {
           text-white flex items-center justify-center
           transition
           `,
-          showArrows
-            ? "opacity-100"
-            : "opacity-0 md:opacity-0 md:group-hover:opacity-100"
+         showArrows
+            ? "opacity-100 visible pointer-events-auto"
+            : "opacity-0 invisible pointer-events-none md:visible md:pointer-events-auto md:group-hover:opacity-100"
         )}
 
         aria-label="Next slide"
@@ -287,14 +308,34 @@ useEffect(() => {
       </button>
 
       {/* DOTS */}
-      <div className="absolute bottom-44 sm:bottom-36 md:bottom-32 left-1/2 -translate-x-1/2 flex gap-2 z-20">
+      <div
+        className="
+          absolute
+          bottom-48 sm:bottom-36 md:bottom-36
+          left-1/2 -translate-x-1/2
+          flex gap-2 z-20
+
+          /* LAPTOP 14–16 INCH ONLY */
+          [@media(min-width:1024px)_and_(max-width:1440px)_and_(max-height:900px)]:bottom-24
+        "
+      >
         {order.map((_, i) => (
           <button
             key={i}
             onClick={() => setIndex(i)}
             className={clsx(
-              "h-2 w-2 rounded-full transition",
-              i === index ? "bg-blue-800 dark:bg-blue-700 " : "bg-white/40 dark:bg-white/40"
+              `
+              rounded-full transition
+
+              h-2 w-2
+
+              /* LAPTOP 14–16 INCH ONLY */
+              [@media(min-width:1024px)_and_(max-width:1440px)_and_(max-height:900px)]:h-1.5
+              [@media(min-width:1024px)_and_(max-width:1440px)_and_(max-height:900px)]:w-1.5
+              `,
+              i === index
+                ? "bg-blue-800 dark:bg-blue-700"
+                : "bg-white/40 dark:bg-white/40"
             )}
             aria-label={`Go to slide ${i + 1}`}
           />
