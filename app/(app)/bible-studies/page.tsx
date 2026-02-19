@@ -309,9 +309,16 @@ function BibleStudiesContent() {
         {loading ? (
           <p className="pt-10 text-center text-slate-500">Loading…</p>
         ) : visibleItems.length === 0 ? (
-          <p className="pt-10 text-center text-slate-500">
-            No Bible Studies found.
-          </p>
+                <div className="py-16 text-center">
+                  <div className="p-8 rounded-2xl border border-dashed border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-900">
+                    <h3 className="text-xl font-semibold text-slate-800 dark:text-slate-200">
+                       No Bible Studies found.
+                    </h3>
+                    <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">
+                      We’ll be adding Bible Studies soon. Please check back later.
+                    </p>
+                  </div>
+                </div>
         ) : (
           <>
             <div className="grid pt-6 grid-cols-1 lg:grid-cols-1 gap-8">

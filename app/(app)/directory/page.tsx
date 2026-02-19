@@ -198,7 +198,7 @@ export default function DirectoryPage() {
 
        {/* ================= LOADING ================= */}
         {loading ? (
-            <div className="min-h-[calc(100vh-4rem)] flex items-center justify-center pt-20">
+            <div className="flex items-center justify-center py-36">
               <div className="flex flex-col items-center gap-3 text-slate-500">
                 <div className="h-6 w-6 animate-spin rounded-full border-2 border-slate-300 border-t-blue-600" />
                 <span className="text-sm">Loading congregations…</span>

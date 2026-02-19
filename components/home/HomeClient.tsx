@@ -11,6 +11,7 @@ import HeroBackground from "@/components/home/HeroBackground";
 import OurBeliefPreview from "@/components/home/OurBeliefPreview";
 import CurveWaveResponsive from "@/components/ui/CurveWaveResponsive";
 import RotatingVerse from "@/components/RotatingVerse";
+import { EmptyState } from "@/components/EmptyState";
 
 import {
   ChevronsRight,
@@ -312,7 +313,7 @@ export default function HomeClient({ sermons, events, bibleStudies }: Props) {
       <section
           className="
             max-w-7xl mx-auto px-6
-            -mt-24 sm:-mt-24 md:-mt-32
+            -mt-24 sm:-mt-24 md:-mt-32 pb-8
             relative z-30
 
             /* LAPTOP ONLY FIX */
@@ -391,7 +392,7 @@ export default function HomeClient({ sermons, events, bibleStudies }: Props) {
       <main>
 
         {/* ================= WORSHIP (White → Blue-50) ================= */}
-        <section id="worship" className="relative pt-36 pb-32 bg-white dark:bg-slate-950 overflow-visible">
+        <section id="worship" className="relative pt-20 pb-20 sm:pt-28 sm:pb-28 md:pt-36 md:pb-32 bg-white dark:bg-slate-950 overflow-visible">
           <div className="absolute bottom-0 left-0 w-full pointer-events-none">
             <WaveFade fromClass="from-transparent" toClass="to-blue-50 dark:to-slate-900" position="bottom" />
             <CurveWaveResponsive direction="normal" baseClass="fill-blue-50 dark:fill-slate-900" />
@@ -464,14 +465,15 @@ export default function HomeClient({ sermons, events, bibleStudies }: Props) {
         </section>
 
         {/* ================= OUR BELIEF PREVIEW (Blue-50) ================= */}
-        <section className="relative bg-blue-50 dark:bg-slate-900 py-16">
+        <section className="relative bg-blue-50 dark:bg-slate-900 py-10 sm:py-16 md:py-28 lg:py-32">
           <Reveal>
             <OurBeliefPreview />
           </Reveal>
         </section>
 
         {/* ================= OUTREACH (Blue-50 → White via wave) ================= */}
-        <section className="relative bg-blue-50 dark:bg-slate-900 pt-28">
+       <section className="relative bg-blue-50 dark:bg-slate-900 pt-16 sm:pt-20 md:pt-24">
+
           <div className="absolute bottom-0 left-0 w-full pointer-events-none">
             <WaveFade fromClass="from-transparent" toClass="to-white dark:to-slate-950" position="bottom" />
             <CurveWaveResponsive direction="reverse" baseClass="fill-white dark:fill-slate-950" />
@@ -549,7 +551,7 @@ export default function HomeClient({ sermons, events, bibleStudies }: Props) {
         </section>
 
         {/* ================= WHY VISIT (White) ================= */}
-        <section className="bg-white dark:bg-slate-950 mt-32 py-28">
+        <section className="bg-white dark:bg-slate-950 mt-16 sm:mt-24 md:mt-32 py-20 sm:py-24 md:py-28">
           <div className="max-w-6xl mx-auto px-6">
             <Reveal>
               <div className="rounded-3xl border border-slate-200/60 dark:border-slate-800/60 bg-white/70 dark:bg-slate-950/60 backdrop-blur-xl shadow-[0_18px_45px_-30px_rgba(2,6,23,0.35)] dark:shadow-none p-10 sm:p-12 text-center space-y-6">
@@ -573,7 +575,7 @@ export default function HomeClient({ sermons, events, bibleStudies }: Props) {
         </section>
 
         {/* ================= FEATURED MEDIA (White + wave to Blue-50) ================= */}
-        <section   id="featured-media" className="relative overflow-hidden py-32 bg-white dark:bg-slate-950">
+        <section   id="featured-media" className="relative overflow-hidden bg-white dark:bg-slate-950 py-20 sm:py-28 md:py-32">
           <div className="relative z-10 max-w-7xl mx-auto px-6 space-y-20">
             <Reveal>
               <div className="text-center space-y-4">
@@ -596,7 +598,8 @@ export default function HomeClient({ sermons, events, bibleStudies }: Props) {
               </Reveal>
 
               <div className="grid md:grid-cols-3 gap-8">
-                {bibleStudies?.slice(0, 3).map((study: BibleStudy, idx: number) => (
+              {bibleStudies && bibleStudies.length > 0 ? (
+                bibleStudies.slice(0, 3).map((study: BibleStudy, idx: number) => (
                   <Reveal key={study.id} delay={0.04 * idx}>
                     <Link
                       href={`/bible-studies/${study.id}`}
@@ -614,7 +617,6 @@ export default function HomeClient({ sermons, events, bibleStudies }: Props) {
                           />
                         </div>
                       )}
-
                       <div className="p-6 space-y-3">
                         <h4 className="font-semibold text-lg line-clamp-2 group-hover:text-blue-700 dark:group-hover:text-blue-300 transition">
                           {study.title}
@@ -634,7 +636,15 @@ export default function HomeClient({ sermons, events, bibleStudies }: Props) {
                       </div>
                     </Link>
                   </Reveal>
-                ))}
+                ))
+              ) : (
+                <div className="md:col-span-3">
+                  <EmptyState
+                     title="No Bible Studies Yet"
+                     description="Please check back soon for upcoming Bible studies centered on God’s Word."
+                  />
+                  </div>
+                )}
               </div>
             </div>
 
@@ -650,7 +660,8 @@ export default function HomeClient({ sermons, events, bibleStudies }: Props) {
               </Reveal>
 
               <div className="grid md:grid-cols-3 gap-8">
-                {sermons?.slice(0, 3).map((s: Sermon, idx: number) => (
+              {sermons && sermons.length > 0 ? (
+                 sermons.slice(0, 3).map((s: Sermon, idx: number) => (
                   <Reveal key={s.id} delay={0.04 * idx}>
                     <Link
                       href={`/sermons/${s.id}`}
@@ -666,6 +677,7 @@ export default function HomeClient({ sermons, events, bibleStudies }: Props) {
                             sizes="(max-width: 768px) 100vw, 33vw"
                             className="w-full h-52 object-cover transition duration-500 group-hover:scale-105"
                           />
+                          
                         </div>
                       )}
 
@@ -688,7 +700,15 @@ export default function HomeClient({ sermons, events, bibleStudies }: Props) {
                       </div>
                     </Link>
                   </Reveal>
-                ))}
+                  ))
+                ) : (
+                  <div className="md:col-span-3">
+                    <EmptyState
+                      title="No Sermons Available"
+                      description="Please check back soon for recorded sermons and messages."
+                    />
+                  </div>
+                )}
               </div>
             </div>
           </div>
@@ -700,7 +720,7 @@ export default function HomeClient({ sermons, events, bibleStudies }: Props) {
         </section>
 
         {/* ================= EVENTS (Blue-50) ================= */}
-        <section id="events" className="bg-blue-50 dark:bg-slate-900 pt-32 py-12">
+      <section id="events" className="bg-blue-50 dark:bg-slate-900 py-20 sm:py-28 md:py-32">
         <div className="max-w-7xl mx-auto px-6 space-y-12">
 
             {/* Header */}
@@ -732,7 +752,7 @@ export default function HomeClient({ sermons, events, bibleStudies }: Props) {
                 <div className="md:col-span-3">
                 <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white/70 dark:bg-slate-950/60 backdrop-blur-xl p-10 text-center shadow-sm">
                     <h3 className="text-xl font-semibold mb-2">
-                    No Upcoming Events
+                      No Upcoming Events
                     </h3>
                     <p className="text-slate-600 dark:text-slate-400">
                     Please check back soon for upcoming gatherings and special activities.
@@ -793,7 +813,7 @@ export default function HomeClient({ sermons, events, bibleStudies }: Props) {
         </section>
 
         {/* ================= DIRECTORY CTA (White) ================= */}
-        <section className="bg-blue-50 dark:bg-slate-900 pb-16 py-32">
+        <section className="bg-blue-50 dark:bg-slate-900 py-20 sm:py-28 md:py-32">
           <div className="max-w-5xl mx-auto px-6">
             <Reveal>
               <div className="rounded-3xl border border-slate-200/60 dark:border-slate-800/60 bg-white/70 dark:bg-slate-950/60 backdrop-blur-xl shadow-[0_18px_45px_-30px_rgba(2,6,23,0.35)] dark:shadow-none p-10 sm:p-12 text-center space-y-6">
@@ -823,7 +843,6 @@ export default function HomeClient({ sermons, events, bibleStudies }: Props) {
             </Reveal>
           </div>
         </section>
-
       </main>
     </div>
   );

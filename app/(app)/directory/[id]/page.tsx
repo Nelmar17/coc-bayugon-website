@@ -117,7 +117,7 @@ export default async function Page({ params }: Props) {
               </Link> */}
 
               <Reveal y={20}> 
-              <p className="uppercase tracking-widest text-lg sm:text-xl text-blue-300 ">                   
+              <p className="uppercase tracking-widest text-sm sm:text-xl mt-8 text-blue-300 ">                   
                   <span className="block">
                     Local Congregation of
                   </span>         
@@ -180,7 +180,7 @@ export default async function Page({ params }: Props) {
       )}
 
       {/* ================= DETAILS ================= */}
-    <section className="relative z-20 pt-12 sm:pt-24 bg-white dark:bg-slate-950">
+    <section className="relative z-20 mt-16 pt-12 sm:pt-24 bg-white dark:bg-slate-950">
         {/* ================= CONTENT ================= */}
           {/* INTRO (still constrained) */}
           <div className="max-w-7xl mx-auto px-4 space-y-6 pb-12 sm:pb-16">

@@ -301,9 +301,16 @@ export default function SermonsClient() {
         {loading ? (
           <p className="pt-10 text-center text-slate-500">Loading…</p>
         ) : visibleSermons.length === 0 ? (
-          <p className="pt-10 text-center text-slate-500">
-            No sermons found.
-          </p>
+              <div className="py-16 text-center">
+                  <div className="p-8 rounded-2xl border border-dashed border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-900">
+                    <h3 className="text-xl font-semibold text-slate-800 dark:text-slate-200">
+                       No sermons found.
+                    </h3>
+                    <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">
+                      We’ll be adding sermons soon. Please check back later.
+                    </p>
+                  </div>
+                </div>
         ) : (
           <>
             <div className="grid pt-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">

@@ -50,7 +50,7 @@ export default function WelcomeSection({
   location,
 }: WelcomeSectionProps) {
   return (
-    <section className="relative z-20 max-w-7xl mx-auto px-6 -mt-32 sm:-mt-32 pb-10 sm:pb-16">
+    <section className="relative z-20 max-w-7xl mx-auto px-4 -mt-28 sm:-mt-32 pb-10 sm:pb-16">
 
         <motion.div
         variants={cardVariants}
@@ -62,7 +62,7 @@ export default function WelcomeSection({
             bg-white/60 dark:bg-slate-900/60
             backdrop-blur
             shadow-2xl
-            ring-1 ring-black/5 dark:ring-white/10
+            ring-1 ring-blue-400/20
             p-6 sm:p-10
             text-center
             space-y-6
@@ -79,18 +79,19 @@ export default function WelcomeSection({
         {/* TITLE */}
         <header className="space-y-2">
           <h2 className="text-2xl sm:text-4xl font-bold text-slate-900 dark:text-slate-100">
-            Welcome to {congregationName}
-            <span className="block pt-2">Church of Christ</span>
+            Welcome to 
+             <span className="block pt-1 sm:pt-2">{congregationName}</span>
+            {/* <span className="block pt-2">Church of Christ</span> */}
           </h2>
 
-          <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300">
+          <p className="pt-2 sm:pt-3 text-sm sm:text-base text-slate-600 dark:text-slate-300">
             A place of worship, faith, and Christian fellowship
           </p>
         </header>
 
         {/* MESSAGE */}
         {welcomeMessage && (
-          <p className="text-lg leading-relaxed text-start max-w-5xl mx-auto py-8 text-slate-800 dark:text-slate-100">
+          <p className="text-lg leading-relaxed text-start max-w-5xl mx-auto py-6 text-slate-800 dark:text-slate-100">
             {welcomeMessage}
           </p>
         )}
