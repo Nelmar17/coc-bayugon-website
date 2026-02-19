@@ -127,12 +127,18 @@ function WaveFade({
    Premium card style
    (reverent: subtle lift, no bouncy scale)
 ------------------------ */
+
+
 const premiumCard =
   "rounded-3xl bg-white/60 dark:bg-slate-950/60 " +
   "backdrop-blur-xl backdrop-saturate-150 " +
   "border border-white/30 dark:border-slate-700/50 " +
-  "shadow-[0_20px_50px_-30px_rgba(0,0,0,0.45)]" +
-  "transition-all duration-300 ease-out hover:-translate-y-1";
+  "shadow-[0_12px_32px_-18px_rgba(0,0,0,0.28)] " +
+  "dark:shadow-[0_12px_28px_-18px_rgba(0,0,0,0.7)] " +
+  "transition-all duration-300 ease-out " +
+  "hover:shadow-[0_20px_48px_-15px_rgba(0,0,0,0.38)] " +
+  "hover:-translate-y-0.75";
+
 
 export default function HomeClient({ sermons, events, bibleStudies }: Props) {
 
