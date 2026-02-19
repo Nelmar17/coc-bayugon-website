@@ -191,9 +191,9 @@ export default function HomeClient({ sermons, events, bibleStudies }: Props) {
               <p
               className="
                     uppercase tracking-[0.35em]
-                    text-[0.6rem]        /* mobile – stay small */
+                    text-[0.7rem]        /* mobile – stay small */
                     md:text-xs           /* tablet */
-                    lg:text-[0.6rem]     /* LAPTOP – LIITAN */
+                    lg:text-[0.7rem]     /* LAPTOP – LIITAN */
                     xl:text-xs           /* malaking laptop */
                     2xl:text-sm          /* desktop lang lumaki */
 
