@@ -37,7 +37,7 @@ function ExpectCard({
     <motion.div variants={itemVariants}>
       <Card
         className={`
-          rounded-2xl border bg-white dark:bg-slate-950 text-center
+          rounded-2xl border bg-white dark:bg-slate-950 text-center border-blue-400/20
           ${compact ? "p-5" : "p-6"}
           space-y-4
         `}

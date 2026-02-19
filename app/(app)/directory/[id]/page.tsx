@@ -4,8 +4,9 @@ import Link from "next/link";
 import SingleDirectoryMap from "@/components/SingleDirectoryMap";
 import CurveWave from "@/components/ui/CurveWave";
 import CurveWaveResponsive from "@/components/ui/CurveWaveResponsive";
-// import WaveDivider from "@/components/ui/WaveDivider";
+import WelcomeSection from "@/components/WelcomeSection";
 import WhatToExpect from "@/components/WhatToExpect";
+import Reveal from "@/components/Reveal";
 
 
 // import MasonryGallery from "@/components/MasonryGallery";
@@ -105,7 +106,7 @@ export default async function Page({ params }: Props) {
           <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black/90" />
 
           <div className="relative z-10 flex items-center h-full">
-            <div className="max-w-7xl just mx-auto w-full px-4 pb-16">
+            <div className="max-w-7xl mx-auto w-full px-4 pb-16">
               
               {/* <Link
                 href="/directory"
@@ -115,16 +116,21 @@ export default async function Page({ params }: Props) {
                 Back to Directory
               </Link> */}
 
+              <Reveal y={20}> 
               <p className="uppercase tracking-widest text-lg sm:text-xl text-blue-300 ">                   
                   <span className="block">
                     Local Congregation of
                   </span>         
               </p>
-              
+             </Reveal> 
+
+             <Reveal delay={0.1}>
               <h1 className="mt-3 sm:mt-4 text-3xl sm:text-4xl md:text-5xl font-bold text-white">
                 {d.congregationName}
               </h1>
+            </Reveal>
 
+              <Reveal delay={0.2}>   
               <div className="mt-4 flex flex-wrap gap-3 text-sm text-white/90">
                 {d.location && (
                   <span className="inline-flex items-center gap-2 bg-white/10 px-3 py-1 rounded-full">
@@ -139,7 +145,8 @@ export default async function Page({ params }: Props) {
                     {d.preacherName}
                   </span>
                 )}
-              </div>
+               </div>
+              </Reveal>
             </div>
           </div>
         </div>
@@ -150,84 +157,28 @@ export default async function Page({ params }: Props) {
   </section>
 
       {/* ================= WELCOME + VERSE ================= */}
-      <section className="max-w-7xl mx-auto px-4 -mt-32 sm:-mt-36 pb-10 sm:pb-16 relative z-20">
-          <div className="
-            rounded-3xl
-            bg-white/80 dark:bg-slate-900/80
-            backdrop-blur
-            shadow-xl
-            p-6 sm:p-8
-            space-y-4
-            text-center
-          ">
-          <h2 className="text-2xl sm:text-4xl py-2 sm:py:4 font-bold text-slate-900 dark:text-slate-100 ">
-            Welcome to {d.congregationName} 
-            <span className="block pt-2 sm:pt-4">
-              Church of Christ
-            </span>
-          </h2>
-          {d.welcomeMessage && (
-            <p className="text-lg leading-relaxed px-6 text-slate-800 dark:text-slate-100">
-              {d.welcomeMessage}
-            </p>
-          )}
 
-          {(d.bibleVerse || d.bibleRef) && (
-            <blockquote className="italic text-slate-700 dark:text-slate-300">
-              {d.bibleVerse && <>“{d.bibleVerse}”</>}
-              {d.bibleRef && (
-                <span className="block mt-2 not-italic text-md text-slate-700 dark:text-slate-200">
-                  — {d.bibleRef}
-                </span>
-              )}
-            </blockquote>
-          )}
-        <div className="flex flex-col sm:flex-row py-6 sm:py-6  justify-center gap-4">
-            <div className="flex justify-center">
-              <Link
-                href="/contact"
-                className="
-                  inline-flex items-center gap-1.5
-                  whitespace-nowrap
-                  rounded-full
-                  bg-blue-600 text-white font-semibold
-                  hover:bg-blue-700 transition
-                   px-4 py-2 text-md
-                  sm:px-6 sm:py-3 sm:text-base
-                  shadow-xl
-                "
-              >
-                Let’s Connect
-                <ChevronsRight className="w-4 h-4 sm:w-5 sm:h-5" />
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
+      <WelcomeSection
+        congregationName={d.congregationName}
+        welcomeMessage={d.welcomeMessage}
+        bibleVerse={d.bibleVerse}
+        bibleRef={d.bibleRef}
+        location={d.location}
+      />
 
       {/* ================= GALLERY ================= */}
+
       {d.gallery?.length > 0 && (
         <section className="max-w-full overflow-hidden mx-auto px-2 sm:px-4 py-2 sm:pb-12 pt-24 sm:pt-32">
           {/* <h2 className="text-2xl md:text-4xl font-bold text-center">
             Life in Our Congregation
           </h2> */}
+          <Reveal y={60}>
           <GalleryViewer images={d.gallery} />
+          </Reveal>
         </section>
       )}
 
-      {/* {groups.map((g) => (
-        <section key={g.title} className="max-w-full mx-auto px-4 py-16 space-y-6">
-          <div className="text-center">
-            <h3 className="text-xl font-bold">{g.title}</h3>
-            {g.date && <p className="text-sm text-slate-500">{g.date}</p>}
-          </div>
-         
-          <GalleryViewer images={g.images} />
-          <MasonryGallery images={g.images} />
-        </section>
-      ))} */}
-
-  
       {/* ================= DETAILS ================= */}
     <section className="relative z-20 pt-12 sm:pt-24 bg-white dark:bg-slate-950">
         {/* ================= CONTENT ================= */}
@@ -251,6 +202,7 @@ export default async function Page({ params }: Props) {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {/* LOCATION */}
               {(d.address || d.location) && (
+                <Reveal delay={0}>
                 <div className="rounded-2xl bg-white/40 dark:bg-slate-900/50 backdrop-blur-xl p-6 space-y-4 shadow-lg ">
                   <h3 className="text-xl font-semibold text-slate-900 dark:text-slate-200">
                     Location
@@ -280,10 +232,12 @@ export default async function Page({ params }: Props) {
                     )}
                   </div>
                 </div>
-              )}
+              </Reveal>
+            )}
 
               {/* WORSHIP SCHEDULE */}
               {d.worshipTimes && (
+              <Reveal delay={0.1}>
                 <div className="rounded-2xl bg-white/70 dark:bg-slate-900/60 backdrop-blur-xl p-6 space-y-4 shadow-lg">
                   <h3 className="text-xl font-semibold text-slate-900 dark:text-slate-200">
                     Worship Schedule
@@ -298,10 +252,12 @@ export default async function Page({ params }: Props) {
                     </div>
                   </div>
                 </div>
-              )}
+              </Reveal>
+            )}
 
               {/* LEADERSHIP & CONTACT */}
               {(d.preacherName || d.elders || d.contactNumber) && (
+              <Reveal delay={0.2}>
                 <div className="rounded-2xl bg-white/70 dark:bg-slate-900/60 backdrop-blur-xl p-6 space-y-4 shadow-lg">
                   <h3 className="text-xl font-semibold text-slate-900 dark:text-slate-200">
                     Leadership & Contact
@@ -342,6 +298,7 @@ export default async function Page({ params }: Props) {
                     )}
                   </div>
                 </div>
+              </Reveal>
               )}
             </div>
           </div>
@@ -365,35 +322,37 @@ export default async function Page({ params }: Props) {
       </p>
     </header>
 
-    {d.latitude && d.longitude && (
-      <div
-        className="
-          mt-6
-          rounded-2xl
-          overflow-hidden
-          border
-          bg-white dark:bg-slate-900
-          shadow-sm
+        {d.latitude && d.longitude && (
+          <Reveal y={80}>
+          <div
+            className="
+              mt-6
+              rounded-2xl
+              overflow-hidden
+              border
+              bg-white dark:bg-slate-900
+              shadow-sm
 
-          h-[260px]          /* 📱 mobile */
-          sm:h-[320px]       /* tablet */
-          md:h-[420px]       /* small desktop */
-          lg:h-[520px]       /* 🖥 desktop */
-          xl:h-[580px]       /* big screens */
-        "
-      >
-        <SingleDirectoryMap
-          latitude={d.latitude}
-          longitude={d.longitude}
-          congregationName={d.congregationName}
-          location={d.location}
-        />
-      </div>
-    )}
-  </div>
-  
+              h-[260px]          /* 📱 mobile */
+              sm:h-[320px]       /* tablet */
+              md:h-[420px]       /* small desktop */
+              lg:h-[520px]       /* 🖥 desktop */
+              xl:h-[580px]       /* big screens */
+            "
+          >
+            <SingleDirectoryMap
+              latitude={d.latitude}
+              longitude={d.longitude}
+              congregationName={d.congregationName}
+              location={d.location}
+            />
+          </div>
+        </Reveal>
+        )}
+    </div>
       {/* ================= CTA ================= */}
-          <section className="py-14 sm:py-24 pt-28 sm:pt-32">
+          <div className="py-14 sm:py-24 pt-28 sm:pt-32">
+            <Reveal>
             <div
               className="
                 mx-auto
@@ -474,14 +433,14 @@ export default async function Page({ params }: Props) {
                 Let’s Connect <ChevronsRight className="w-5 h-5 sm:w-5 sm:h-5" />
               </Link>
             </div>
-          </section>
+           </Reveal>
+          </div>
         </section>                
        {/* ================= WHAT TO EXPECT ================= */}
      <WhatToExpect compact />
     </div>
   );
 }
-
 
 
 
