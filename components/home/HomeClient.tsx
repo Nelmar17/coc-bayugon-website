@@ -400,7 +400,8 @@ export default function HomeClient({ sermons, events, bibleStudies }: Props) {
                   </p>
 
                   <h2 className="text-4xl sm:text-5xl font-semibold tracking-tight leading-tight text-slate-900 dark:text-slate-50 text-balance">
-                    Worship God in Spirit and in Truth
+                     <span className="block">Worship God in</span>
+                     <span className="block mt-3">Spirit and in Truth</span>
                   </h2>
 
                   <p className="text-lg text-slate-600 dark:text-slate-400 leading-relaxed">
