@@ -147,7 +147,7 @@ export default function DirectoryPage() {
   
   {/* ================= MAIN CONTENT ================= */}
   
-    <div className="max-w-7xl mx-auto px-4 relative z-20 space-y-10">
+    <div className="max-w-7xl mx-auto px-4 relative z-20 space-y-10 pb-20 sm:pb-28 md:pb-36">
       <h1 className="text-4xl font-bold text-left">
         Find a Congregation Near You 
       </h1>
@@ -226,7 +226,7 @@ export default function DirectoryPage() {
               variants={stagger}
               initial="hidden"
               animate={filtered.length > 0 ? "visible" : "hidden"}
-              className="grid md:grid-cols-3 pb-28 gap-6"
+              className="grid md:grid-cols-3 pt-8 pb-28 gap-6"
             >
             {filtered.map((item) => (
             <motion.a

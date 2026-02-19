@@ -518,7 +518,7 @@ const showLightNavbar = scrolled || isLightRoute;
         {showTop && (
           <button
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            className="fixed bottom-6 right-6 z-50 p-3 rounded-full
+            className="fixed bottom-6 right-6 z-30 p-3 rounded-full
             text-white
             bg-blue-800/50 dark:bg-sky-700/80
             backdrop-blur-sm backdrop-saturate-150

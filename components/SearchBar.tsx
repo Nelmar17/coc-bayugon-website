@@ -203,7 +203,7 @@ const isMobile =
                 fixed top-[72px] left-1/2 -translate-x-1/2
                 w-[90%] max-w-xl
                 rounded-2xl
-                bg-white/60 dark:bg-slate-900/40
+                bg-white/90 dark:bg-slate-900/80
                 backdrop-blur-2xl backdrop-saturate-150
                 border border-white/20 dark:border-white/10
                 shadow-[0_20px_50px_rgba(0,0,0,0.25)]
@@ -214,7 +214,7 @@ const isMobile =
                 className="
                   flex items-center gap-3 px-4 py-3
                   rounded-xl
-                  bg-white/30 dark:bg-slate-800/40
+                  bg-white/40 dark:bg-slate-800/40
                   backdrop-blur-2xl
                   border border-white/20 dark:border-white/10
                   focus-within:ring-2 focus-within:ring-white/30
@@ -238,13 +238,13 @@ const isMobile =
             {/* RESULTS */}
             <div className="max-h-[60vh] overflow-y-auto">
               {loading && (
-                <p className="px-4 py-3 text-sm text-slate-950 dark:text-slate-100 hover:bg-slate-200/60 dark:hover:bg-white/10">
+                <p className="px-4 py-3 rounded-xl text-sm text-slate-950 dark:text-slate-100 hover:bg-slate-200/60 dark:hover:bg-white/10">
                   Searching…
                 </p>
               )}
 
               {!loading && query && results.length === 0 && (
-                <p className="px-4 py-3 text-sm text-slate-950 dark:text-slate-100 hover:bg-slate-200/60 dark:hover:bg-white/10">
+                <p className="px-4 py-3 rounded-xl text-sm text-slate-950 dark:text-slate-100 hover:bg-slate-200/60 dark:hover:bg-white/10">
                   No results found.
                 </p>
               )}
@@ -254,7 +254,7 @@ const isMobile =
                   key={`${r.type}-${r.id}`}
                   onClick={() => go(r.href)}
                   className="
-                  w-full flex items-center gap-3 px-4 py-3 text-left
+                  w-full flex rounded-xl items-center gap-3 px-4 py-3 text-left
                   text-slate-950 dark:text-slate-100
                   hover:bg-slate-200/60 dark:hover:bg-white/10
                 "
