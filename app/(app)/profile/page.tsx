@@ -9,8 +9,9 @@ import Link from "next/link";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import {
-  ChevronsLeft,
+  ChevronsLeft, Plus, Eye, EyeOff
 } from "lucide-react";
+
 
 export default function ProfilePage() {
   const [me, setMe] = useState<any>(null);
@@ -21,6 +22,8 @@ export default function ProfilePage() {
   const [savingAvatar, setSavingAvatar] = useState(false);
   const [avatarVersion, setAvatarVersion] = useState(Date.now());
 
+  const [showOldPassword, setShowOldPassword] = useState(false);
+  const [showNewPassword, setShowNewPassword] = useState(false);
 
   useEffect(() => {
   return () => {
@@ -300,24 +303,43 @@ export default function ProfilePage() {
 
         <CardContent>
           <form className="space-y-4" onSubmit={changePassword}>
-            <div>
+            <div className="space-y-1">
               <Label>Old Password</Label>
-              <Input
-                type="password"
-                value={passwords.oldPassword}
-                onChange={(e) =>
-                  setPasswords({
-                    ...passwords,
-                    oldPassword: e.target.value,
-                  })
-                }
-              />
+
+              <div className="relative">
+                <Input
+                  type={showOldPassword ? "text" : "password"}
+                  value={passwords.oldPassword}
+                  onChange={(e) =>
+                    setPasswords({
+                      ...passwords,
+                      oldPassword: e.target.value,
+                    })
+                  }
+                  className="pr-10"
+                />
+
+                <button
+                  type="button"
+                  onClick={() => setShowOldPassword((prev) => !prev)}
+                  className="absolute inset-y-0 right-2 flex items-center text-slate-500 hover:text-slate-700"
+                  tabIndex={-1}
+                >
+                  {showOldPassword ? (
+                    <EyeOff className="w-4 h-4" />
+                  ) : (
+                    <Eye className="w-4 h-4" />
+                  )}
+                </button>
+              </div>
             </div>
 
-            <div>
-              <Label>New Password</Label>
+          <div className="space-y-1">
+            <Label>New Password</Label>
+
+            <div className="relative">
               <Input
-                type="password"
+                type={showNewPassword ? "text" : "password"}
                 value={passwords.newPassword}
                 onChange={(e) =>
                   setPasswords({
@@ -325,8 +347,23 @@ export default function ProfilePage() {
                     newPassword: e.target.value,
                   })
                 }
+                className="pr-10"
               />
+
+              <button
+                type="button"
+                onClick={() => setShowNewPassword((prev) => !prev)}
+                className="absolute inset-y-0 right-2 flex items-center text-slate-500 hover:text-slate-700"
+                tabIndex={-1}
+              >
+                {showNewPassword ? (
+                  <EyeOff className="w-4 h-4" />
+                ) : (
+                  <Eye className="w-4 h-4" />
+                )}
+              </button>
             </div>
+          </div>
 
             <Button variant="destructive" type="submit" className="rounded-full bg-red-600 hover:bg-red-500">
               Change Password

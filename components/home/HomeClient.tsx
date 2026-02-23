@@ -191,11 +191,11 @@ export default function HomeClient({ sermons, events, bibleStudies }: Props) {
               <p
               className="
                     uppercase tracking-[0.35em]
-                    text-[0.7rem]        /* mobile – stay small */
-                    md:text-xs           /* tablet */
-                    lg:text-[0.7rem]     /* LAPTOP – LIITAN */
-                    xl:text-xs           /* malaking laptop */
-                    2xl:text-sm          /* desktop lang lumaki */
+                    text-[0.7rem]        
+                    md:text-xs           
+                    lg:text-[0.7rem]     
+                    xl:text-xs           
+                    2xl:text-sm          
 
                     text-slate-300
 
@@ -314,7 +314,7 @@ export default function HomeClient({ sermons, events, bibleStudies }: Props) {
           className="
             max-w-7xl mx-auto px-6
             -mt-24 sm:-mt-24 md:-mt-32 pb-8
-            relative z-30
+            relative z-20
 
             /* LAPTOP ONLY FIX */
             [@media(min-width:1024px)_and_(max-width:1440px)_and_(max-height:900px)]:-mt-20

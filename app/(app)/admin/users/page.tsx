@@ -2,7 +2,7 @@
 
 import { useEffect, useState, FormEvent } from "react";
 import { toast } from "sonner";
-import { Plus } from "lucide-react";
+import { Plus, Eye, EyeOff } from "lucide-react";
 
 import { apiFetch } from "@/lib/fetcher";
 
@@ -85,6 +85,8 @@ export default function AdminUsersPage() {
   const [deleteTarget, setDeleteTarget] = useState<UserRow | null>(null);
   const [confirmEmail, setConfirmEmail] = useState("");
   const [deletingId, setDeletingId] = useState<string | null>(null);
+
+  const [showPassword, setShowPassword] = useState(false);
 
   /* ---------------- LOAD ---------------- */
 
@@ -217,9 +219,9 @@ export default function AdminUsersPage() {
   /* ---------------- UI ---------------- */
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 w-full max-w-full overflow-x-hidden">
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h2 className="text-2xl font-bold tracking-tight">Users</h2>
           <p className="text-sm text-slate-500">
@@ -235,9 +237,7 @@ export default function AdminUsersPage() {
             </Button>
           </DialogTrigger>
 
-          <DialogContent className="w-full h-[60dvh] max-w-none rounded-none overflow-y-auto
-                md:h-auto md:max-h-[90vh] md:max-w-md md:rounded-lg">
-
+          <DialogContent className="sm:max-w-md max-h-[90vh] overflow-y-auto">
             <DialogHeader>
               <DialogTitle>
                 {editingId ? "Edit User" : "Add User"}
@@ -275,14 +275,31 @@ export default function AdminUsersPage() {
               {!editingId && (
                 <div className="space-y-1">
                   <Label>Password</Label>
-                  <Input
-                    type="password"
-                    required
-                    value={form.password}
-                    onChange={(e) =>
-                      setForm((f) => ({ ...f, password: e.target.value }))
-                    }
-                  />
+
+                  <div className="relative">
+                    <Input
+                      type={showPassword ? "text" : "password"}
+                      required
+                      value={form.password}
+                      onChange={(e) =>
+                        setForm((f) => ({ ...f, password: e.target.value }))
+                      }
+                      className="pr-10"
+                    />
+
+                    <button
+                      type="button"
+                      onClick={() => setShowPassword((prev) => !prev)}
+                      className="absolute inset-y-0 right-2 flex items-center text-slate-500 hover:text-slate-700"
+                      tabIndex={-1}
+                    >
+                      {showPassword ? (
+                        <EyeOff className="w-4 h-4" />
+                      ) : (
+                        <Eye className="w-4 h-4" />
+                      )}
+                    </button>
+                  </div>
                 </div>
               )}
 
@@ -323,7 +340,7 @@ export default function AdminUsersPage() {
       </div>
 
       {/* Table */}
-      <Card className="rounded-xl border shadow-lg bg-white dark:bg-slate-950/50 border-blue-100 px-2 dark:border-slate-700/50">
+      <Card className="rounded-xl border shadow-lg bg-white dark:bg-slate-950/50 border-blue-100 dark:border-slate-700/50 px-1 sm:px-4 w-full overflow-hidden">
         <CardHeader>
           <CardTitle>Users</CardTitle>
         </CardHeader>
@@ -336,13 +353,13 @@ export default function AdminUsersPage() {
               ) : (
                 <>
                   {/* ================= MOBILE CARDS ================= */}
-                  <div className="space-y-3 md:hidden">
+                  <div className="space-y-4 md:hidden">
                     {users.map((u) => (
                       <div
                         key={u.id}
-                        className="rounded-lg border p-3 space-y-3"
+                        className="rounded-xl border bg-white dark:bg-slate-900 p-4 space-y-3 shadow-sm"
                       >
-                        <div className="flex items-center gap-3">
+                       <div className="flex items-center gap-3 min-w-0">
                           <Avatar className="border">
                             <AvatarImage src={getAvatarSrc(u)} />
                             <AvatarFallback>
@@ -350,21 +367,23 @@ export default function AdminUsersPage() {
                             </AvatarFallback>
                           </Avatar>
 
-                          <div className="flex-1">
+                          <div className="flex-1 min-w-0">
                             <p className="font-medium">{u.name || "—"}</p>
-                            <p className="text-xs text-slate-500">{u.email}</p>
+                            <p className="text-xs text-slate-500 break-all">
+                              {u.email}
+                            </p>
                           </div>
 
-                          <span className="text-xs rounded-md bg-slate-100 px-2 py-1 capitalize">
+                          <span className="text-xs rounded-md bg-slate-100 dark:bg-slate-800 px-2 py-1 capitalize whitespace-nowrap">
                             {u.role}
                           </span>
                         </div>
 
-                        <div className="flex gap-2">
+                        <div className="flex gap-2 w-full">
                           <Button
                             size="sm"
                             variant="outline"
-                            className="flex-1"
+                            className="flex-1 min-w-0"
                             onClick={() => openEdit(u)}
                           >
                             Edit
@@ -373,7 +392,7 @@ export default function AdminUsersPage() {
                           <Button
                             size="sm"
                             variant="destructive"
-                            className="flex-1"
+                            className="flex-1 min-w-0"
                             disabled={cannotDeleteUser(u)}
                             onClick={() => {
                               setDeleteTarget(u);
@@ -458,7 +477,7 @@ export default function AdminUsersPage() {
           }
         }}
       >
-        <AlertDialogContent>
+        <AlertDialogContent className="w-[95%] max-w-md">
           <AlertDialogHeader>
             <AlertDialogTitle>Delete user?</AlertDialogTitle>
             <AlertDialogDescription asChild>

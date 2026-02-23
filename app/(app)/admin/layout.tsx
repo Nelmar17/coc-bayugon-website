@@ -538,7 +538,7 @@ const [usersOpen, setUsersOpen] = useState(
       </aside>
 
 {/* CONTENT */}
-      <main className="min-h-screen flex-1 bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100">
+      <main className="min-h-screen flex flex-col flex-1 bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100">
 
           {/* HEADER */}
  <div
@@ -624,7 +624,7 @@ const [usersOpen, setUsersOpen] = useState(
 
           </div>
      {/* PAGE CONTENT */}
-        <div className="relative p-6 bg-white dark:bg-slate-950">
+       <div className="relative flex-1 p-6 pb-24 md:28 bg-white dark:bg-slate-950">
           {/* 1px BLEED — kills sub-pixel seam */}
           <div
             aria-hidden
