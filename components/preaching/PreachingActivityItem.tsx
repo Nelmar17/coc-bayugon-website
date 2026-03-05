@@ -14,6 +14,7 @@ function typeLabel(type: string) {
     mission_trip: "Mission Trip",
     youth_service: "Youth Service",
     special_event: "Special Event",
+    preachers_bible_class: "Preachers Bible Class",
   };
   return map[type] ?? type;
 }
