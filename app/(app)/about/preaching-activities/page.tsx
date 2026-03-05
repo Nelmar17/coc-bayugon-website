@@ -133,6 +133,7 @@ function PreachingActivitiesContent() {
             <option value="mission_trip">Mission Trip</option>
             <option value="youth_service">Youth Service</option>
             <option value="special_event">Special Event</option>
+            <option value="preachers_bible_class">Preachers Bible Class</option>
           </select>
 
           <select

@@ -336,6 +336,7 @@ enum PreachingActivityType {
   mission_trip
   youth_service
   special_event
+  preachers_bible_class
 }
 
 model WhoWeAre {

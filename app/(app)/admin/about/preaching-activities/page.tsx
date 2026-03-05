@@ -40,7 +40,8 @@ type PreachingActivityType =
   | "visitation"
   | "mission_trip"
   | "youth_service"
-  | "special_event";
+  | "special_event"
+  | "preachers_bible_class";
 
 type PreachingActivity = {
   id: number;
@@ -159,6 +160,7 @@ function typeLabel(t: PreachingActivityType) {
     mission_trip: "Mission Trip",
     youth_service: "Youth Service",
     special_event: "Special Event",
+    preachers_bible_class: "Preachers Bible Class",
   };
   return map[t];
 }
@@ -477,6 +479,7 @@ async function removeGalleryIndex(idx: number) {
                       "mission_trip",
                       "youth_service",
                       "special_event",
+                      "preachers_bible_class",
                     ] as PreachingActivityType[]
                   ).map((t) => (
                     <option key={t} value={t}>
