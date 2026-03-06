@@ -226,7 +226,7 @@ export default function DirectoryPage() {
               variants={stagger}
               initial="hidden"
               animate={filtered.length > 0 ? "visible" : "hidden"}
-              className="grid md:grid-cols-3 pt-8 pb-28 gap-6"
+              className="grid md:grid-cols-3 pt-8 pb-28 gap-8 sm:gap-6 md:gap-6"
             >
             {filtered.map((item) => (
             <motion.a
