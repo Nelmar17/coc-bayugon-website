@@ -330,6 +330,7 @@ model PreachingActivity {
 
 enum PreachingActivityType {
   gospel_meeting
+  gospel_preaching
   midweek_service
   sunday_service
   visitation

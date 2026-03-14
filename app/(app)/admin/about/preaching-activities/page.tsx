@@ -35,6 +35,7 @@ import UploadButton from "@/components/UploadButton";
 
 type PreachingActivityType =
   | "gospel_meeting"
+  | "gospel_preaching"
   | "midweek_service"
   | "sunday_service"
   | "visitation"
@@ -154,6 +155,7 @@ function datetimeLocalToISO(v: string) {
 function typeLabel(t: PreachingActivityType) {
   const map: Record<PreachingActivityType, string> = {
     gospel_meeting: "Gospel Meeting",
+    gospel_preaching: "Gospel Preaching",
     midweek_service: "Midweek Service",
     sunday_service: "Sunday Service",
     visitation: "Visitation",
@@ -473,6 +475,7 @@ async function removeGalleryIndex(idx: number) {
                   {(
                     [
                       "gospel_meeting",
+                      "gospel_preaching",
                       "midweek_service",
                       "sunday_service",
                       "visitation",

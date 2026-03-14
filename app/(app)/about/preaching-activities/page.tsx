@@ -127,6 +127,7 @@ function PreachingActivitiesContent() {
           >
             <option value="all">All Types</option>
             <option value="gospel_meeting">Gospel Meeting</option>
+            <option value="gospel_preaching">Gospel Preaching</option>
             <option value="midweek_service">Midweek Service</option>
             <option value="sunday_service">Sunday Service</option>
             <option value="visitation">Visitation</option>

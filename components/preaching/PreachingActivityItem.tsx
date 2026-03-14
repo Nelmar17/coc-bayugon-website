@@ -8,6 +8,7 @@ import { format } from "date-fns";
 function typeLabel(type: string) {
   const map: Record<string, string> = {
     gospel_meeting: "Gospel Meeting",
+    gospel_preaching: "Gospel Preaching",
     midweek_service: "Midweek Service",
     sunday_service: "Sunday Service",
     visitation: "Visitation",

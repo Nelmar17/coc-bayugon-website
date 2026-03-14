@@ -272,7 +272,7 @@ export default function Footer() {
           <p className="text-slate-600 dark:text-slate-500">
             Designed & Developed by{" "}
             <a
-              href="https://nelmarbuncag.vercel.app/"
+              href="https://buncagnelmar.vercel.app/"
               target="_blank"
               rel="noopener noreferrer"
               className="text-blue-700 dark:text-blue-400 hover:opacity-80 transition"
