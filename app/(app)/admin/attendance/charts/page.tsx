@@ -31,9 +31,6 @@ export default function AttendanceChartsPage() {
   const [rows, setRows] = useState<AttendanceRow[]>([]);
   const [loading, setLoading] = useState(false);
 
-
-
-  
   async function load() {
     setLoading(true);
     try {

@@ -643,6 +643,30 @@ const isOnline = isUserOnline(user?.onlineAt);
                 >My Attendance</Link>
           </DropdownMenuItem>
 
+
+          <DropdownMenuItem
+            asChild
+            className="
+              rounded-full
+              p-0
+              text-base
+              transition-colors
+              data-[highlighted]:bg-blue-600/40
+            "
+          >
+            <Link
+              href="/attendance/all"
+              className="
+                flex w-full items-center
+                px-3 py-1.5
+                text-slate-950
+                dark:text-white
+              "
+            >
+              General Attendance 
+            </Link>
+          </DropdownMenuItem>
+
           {/* ✅ ALL USERS */}
           <DropdownMenuItem asChild 
                  className="
@@ -924,6 +948,14 @@ function MobileMenu({
             onClick={() => setOpen(false)}
             >
             My Attendance
+          </MobileLink>
+
+          <MobileLink 
+            href="/attendance/all" 
+            active={isRouteActive("/attendance/all")}
+            onClick={() => setOpen(false)}
+          >
+            All Members Attendance
           </MobileLink>
 
           <MobileLink 
