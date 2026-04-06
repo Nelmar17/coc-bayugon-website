@@ -955,7 +955,7 @@ function MobileMenu({
             active={isRouteActive("/attendance/all")}
             onClick={() => setOpen(false)}
           >
-            All Members Attendance
+            General Attendance
           </MobileLink>
 
           <MobileLink 
